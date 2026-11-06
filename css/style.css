@@ -228,6 +228,23 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .hcount { font-variant-numeric: tabular-nums; letter-spacing: .06em; }
 .hcount b { color: var(--text); font-weight: 500; }
 
+/* Celular / tablet táctil: carrusel que se desliza con el dedo, con imán en cada proyecto */
+.hscroll.swipe { height: auto; }
+.hscroll.swipe .hscroll-sticky { position: relative; height: auto; overflow: visible; padding: 84px 0 36px; }
+.hscroll.swipe .section-head { margin-bottom: 8px; }
+.hscroll.swipe .hscroll-viewport {
+  overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch; scrollbar-width: none;
+}
+.hscroll.swipe .hscroll-viewport::-webkit-scrollbar { display: none; }
+.hscroll.swipe .hscroll-track { transform: none !important; transition: none; height: auto; }
+.hscroll.swipe .slide { flex: 0 0 100%; width: 100%; height: auto; padding: 24px 0 18px; scroll-snap-align: center; scroll-snap-stop: always; }
+.hscroll.swipe .slide .feature-text, .hscroll.swipe .slide .feature-media { opacity: 1; transform: none; }
+.hscroll.swipe .feature-media { max-height: none; }
+.hscroll.swipe .feature-media img.main { transform: none; }
+.hhint { display: none; margin-left: auto; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
+.hscroll.swipe .hhint { display: inline; }
+
 /* Sin animación (o si el usuario la reduce): vuelve a lista vertical */
 .hscroll.static { height: auto; }
 .hscroll.static .hscroll-sticky { position: relative; height: auto; overflow: visible; padding: 120px 0; }
@@ -375,6 +392,9 @@ figcaption.cap { padding: 12px 16px; font-size: 13px; color: var(--muted); borde
 .finish.on { border-color: var(--accent); }
 .p-next { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(32px, 6vw, 96px); align-items: center; padding: 90px 0 120px; border-top: 1px solid var(--line); }
 .p-next h3 { margin: 10px 0 24px; font-family: var(--serif); font-weight: 400; font-size: clamp(44px, 5vw, 72px); line-height: .95; }
+
+/* En celular no se muestra la foto de "Sobre mí" */
+@media (max-width: 760px), (max-height: 520px) and (orientation: landscape) { .portrait { display: none; } }
 
 /* ---------- Pantallas muy bajitas (celular horizontal) ---------- */
 @media (max-height: 520px) and (orientation: landscape) {

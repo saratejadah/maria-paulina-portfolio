@@ -89,59 +89,69 @@
     $$(".reveal:not(.in)").forEach((e) => io.observe(e));
   }
 
-  /* Proyectos destacados en horizontal: la sección se queda fija y el scroll
-     vertical decide qué proyecto se muestra. Nunca se queda a la mitad: al
-     pasar cierto punto del scroll, el siguiente proyecto entra completo con
-     una transición. */
+  /* Proyectos destacados en horizontal.
+     - Computador: la sección se queda fija y el scroll vertical decide qué
+       proyecto se muestra (un movimiento de rueda = un proyecto, nunca a la mitad).
+     - Celular / tablet táctil: carrusel que se desliza con el dedo hacia el lado,
+       con imán en cada proyecto; la página baja normal. */
   function horizontalWork() {
     const sec = $("#work"), vp = $(".hscroll-viewport"), track = $("#featured-list");
     if (!sec || !track) return;
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) { sec.classList.add("static"); return; }
+    const swipeMQ = matchMedia("(max-width: 820px), (hover: none) and (pointer: coarse)");
+    let swipe = swipeMQ.matches;
     const n = () => track.children.length;
     const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
     const range = () => sec.offsetHeight - innerHeight;
     let raf = 0, current = -1;
 
-    // Altura de la sección: una pantalla + 60% de pantalla por cada proyecto extra
-    // (en celular, un deslizamiento corto basta para cambiar de proyecto).
-    const size = () => { sec.style.height = `calc(100svh + ${Math.max(0, n() - 1)} * 60svh)`; };
+    // Computador: una pantalla + 60% de pantalla de scroll por cada proyecto extra
+    const size = () => { sec.style.height = swipe ? "" : `calc(100svh + ${Math.max(0, n() - 1)} * 60svh)`; };
     const topOf = () => sec.getBoundingClientRect().top + scrollY;
     const posOf = (i) => topOf() + (n() > 1 ? (i / (n() - 1)) * range() : 0);
-    const update = () => {
-      raf = 0;
-      const count = n(); if (!count) return;
-      const p = clamp(-sec.getBoundingClientRect().top / Math.max(1, range()), 0, 1);
-      const idx = count === 1 ? 0 : clamp(Math.round(p * (count - 1)), 0, count - 1);
+    const show = (idx, count) => {
       if (idx === current) return;
       current = idx;
-      track.style.transform = `translate3d(${-idx * 100}vw,0,0)`;
+      if (!swipe) track.style.transform = `translate3d(${-idx * 100}vw,0,0)`;
       [...track.children].forEach((s, i) => { s.classList.toggle("on", i === idx); });
       $("#h-current").textContent = String(idx + 1).padStart(2, "0");
       $("#h-bar").style.transform = `scaleX(${count === 1 ? 1 : idx / (count - 1)})`;
     };
+    const update = () => {
+      raf = 0;
+      const count = n(); if (!count) return;
+      if (swipe) return show(clamp(Math.round(vp.scrollLeft / Math.max(1, vp.clientWidth)), 0, count - 1), count);
+      const p = clamp(-sec.getBoundingClientRect().top / Math.max(1, range()), 0, 1);
+      show(count === 1 ? 0 : clamp(Math.round(p * (count - 1)), 0, count - 1), count);
+    };
     const tick = () => { if (!raf) raf = requestAnimationFrame(update); };
-
-    // Si se navega con teclado (Tab) a un proyecto que está fuera de pantalla, llevar el scroll hasta él
-    track.addEventListener("focusin", (e) => {
-      const s = e.target.closest(".slide"); if (!s) return;
-      const i = [...track.children].indexOf(s);
+    const applyMode = () => {
+      swipe = swipeMQ.matches;
+      sec.classList.toggle("swipe", swipe);
+      track.style.transform = "";
       vp.scrollLeft = 0;
-      scrollTo({ top: posOf(i), behavior: "auto" });
+      size(); current = -1; update();
+    };
+
+    // Teclado (Tab) en computador: llevar el scroll hasta el proyecto enfocado
+    track.addEventListener("focusin", (e) => {
+      if (swipe) return; // en el carrusel el navegador lo desplaza solo
+      const s = e.target.closest(".slide"); if (!s) return;
+      vp.scrollLeft = 0;
+      scrollTo({ top: posOf([...track.children].indexOf(s)), behavior: "auto" });
     });
 
-    // Rueda del mouse / trackpad: un gesto = un proyecto. Mientras la sección está
-    // fija, cada movimiento de rueda salta al proyecto siguiente o anterior, y se
-    // ignoran los eventos restantes del mismo gesto (inercia del trackpad).
+    // Rueda del mouse / trackpad: un gesto = un proyecto (se ignora la inercia del trackpad)
     let locked = false, lockStart = 0, lastWheel = 0;
     addEventListener("wheel", (e) => {
-      if (e.ctrlKey || Math.abs(e.deltaY) < Math.abs(e.deltaX)) return; // zoom o scroll lateral
+      if (swipe || e.ctrlKey || Math.abs(e.deltaY) < Math.abs(e.deltaX)) return;
       const r = sec.getBoundingClientRect();
       const pinned = r.top <= 1 && r.bottom >= innerHeight - 1;
       const now = performance.now();
       if (!pinned) {
         // Al entrar a la sección, detenerse exactamente en el primer (o último) proyecto
-        const enteringDown = e.deltaY > 0 && r.top > 1 && r.top - e.deltaY < 0;
-        const enteringUp = e.deltaY < 0 && r.bottom < innerHeight - 1 && r.bottom - e.deltaY > innerHeight;
+        const enteringDown = e.deltaY > 0 && r.top > 1 && r.top - e.deltaY <= 1;
+        const enteringUp = e.deltaY < 0 && r.bottom < innerHeight - 1 && r.bottom - e.deltaY >= innerHeight - 1;
         if (!locked && (enteringDown || enteringUp)) {
           e.preventDefault();
           locked = true; lockStart = lastWheel = now;
@@ -160,9 +170,12 @@
       locked = true; lockStart = lastWheel = now;
       scrollTo({ top: posOf(next), behavior: "auto" });
     }, { passive: false });
+
+    vp.addEventListener("scroll", tick, { passive: true });
     addEventListener("scroll", tick, { passive: true });
     addEventListener("resize", () => { size(); tick(); });
-    size(); update();
+    swipeMQ.addEventListener("change", applyMode);
+    applyMode();
     horizontalWork.refresh = () => { size(); current = -1; update(); };
   }
 
