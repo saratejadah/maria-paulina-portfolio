@@ -37,10 +37,17 @@
     </section>
 
     <!-- PROYECTOS DESTACADOS -->
-    <section class="section" id="work">
-      <div class="wrap">
-        <div class="section-head reveal"><h2 data-i18n="featured.title"></h2></div>
-        <div class="featured-list" id="featured-list"></div>
+    <!-- Al hacer scroll vertical, la sección queda fija y los proyectos se desplazan en horizontal -->
+    <section class="hscroll" id="work">
+      <div class="hscroll-sticky">
+        <div class="section-head"><h2 data-i18n="featured.title"></h2></div>
+        <div class="hscroll-viewport">
+          <div class="hscroll-track" id="featured-list"></div>
+        </div>
+        <div class="hprogress wrap" aria-hidden="true">
+          <span class="hbar"><i id="h-bar"></i></span>
+          <span class="hcount"><b id="h-current">01</b> / <span id="h-total">05</span></span>
+        </div>
       </div>
     </section>
 

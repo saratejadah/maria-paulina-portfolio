@@ -78,7 +78,7 @@
   function setLang(l) {
     lang = l; localStorage.setItem("mp-lang", l);
     if (params.has("lang")) { params.delete("lang"); history.replaceState(null, "", location.pathname + (params.toString() ? "?" + params : "") + location.hash); }
-    renderPage(); applyI18n(); observeReveals();
+    renderPage(); applyI18n(); observeReveals(); horizontalWork.refresh && horizontalWork.refresh();
   }
 
   /* ---------- Animación de entrada al hacer scroll ---------- */
@@ -89,21 +89,51 @@
     $$(".reveal:not(.in)").forEach((e) => io.observe(e));
   }
 
-  /* Parallax suave de las imágenes destacadas */
-  function parallax() {
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  /* Proyectos destacados en horizontal: la sección se queda fija y el scroll
+     vertical mueve los proyectos de lado. Cada proyecto se "detiene" un momento
+     antes de pasar al siguiente. */
+  function horizontalWork() {
+    const sec = $("#work"), vp = $(".hscroll-viewport"), track = $("#featured-list");
+    if (!sec || !track) return;
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { sec.classList.add("static"); return; }
+    const n = () => track.children.length;
+    const HOLD = 0.3; // fracción de cada tramo en la que el proyecto queda quieto
+    const ease = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
+    const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+    const range = () => sec.offsetHeight - innerHeight;
     let raf = 0;
+
+    const size = () => { sec.style.height = `calc(${n()} * 100svh)`; };
     const update = () => {
-      raf = 0; const vh = innerHeight;
-      $$("#featured-list .feature-media img.main").forEach((img) => {
-        const r = img.parentElement.getBoundingClientRect();
-        if (r.bottom < 0 || r.top > vh) return;
-        const p = (r.top + r.height / 2 - vh / 2) / vh; // -1..1
-        img.style.transform = `scale(1.08) translateY(${(p * -24).toFixed(1)}px)`;
+      raf = 0;
+      const count = n(); if (!count) return;
+      const p = clamp(-sec.getBoundingClientRect().top / Math.max(1, range()), 0, 1);
+      const u = p * (count - 1), k = Math.min(Math.floor(u), count - 2), f = u - k;
+      const x = count === 1 ? 0 : k + ease(clamp((f - HOLD / 2) / (1 - HOLD), 0, 1));
+      track.style.transform = `translate3d(${(-x * 100).toFixed(3)}vw,0,0)`;
+      // Profundidad: la imagen se mueve un poco más lento que la tarjeta
+      [...track.children].forEach((s, i) => {
+        const img = s.querySelector("img.main");
+        if (img) img.style.transform = `scale(1.1) translateX(${((i - x) * -8).toFixed(2)}%)`;
       });
+      const cur = Math.round(x);
+      $("#h-current").textContent = String(cur + 1).padStart(2, "0");
+      $("#h-bar").style.transform = `scaleX(${(count === 1 ? 1 : x / (count - 1)).toFixed(4)})`;
     };
-    addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
-    update();
+    const tick = () => { if (!raf) raf = requestAnimationFrame(update); };
+
+    // Si se navega con teclado (Tab) a un proyecto que está fuera de pantalla, llevar el scroll hasta él
+    track.addEventListener("focusin", (e) => {
+      const s = e.target.closest(".slide"); if (!s) return;
+      const i = [...track.children].indexOf(s);
+      vp.scrollLeft = 0;
+      const top = sec.getBoundingClientRect().top + scrollY;
+      scrollTo({ top: top + (n() > 1 ? (i / (n() - 1)) * range() : 0), behavior: "auto" });
+    });
+    addEventListener("scroll", tick, { passive: true });
+    addEventListener("resize", () => { size(); tick(); });
+    size(); update();
+    horizontalWork.refresh = () => { size(); update(); };
   }
 
   /* ---------- Contacto ---------- */
@@ -116,20 +146,23 @@
   function renderHome() {
     // Destacados
     $("#featured-list").innerHTML = P.map((p, i) => `
+      <div class="slide" aria-roledescription="slide" aria-label="${i + 1} / ${P.length}">
       <article class="feature">
-        <div class="feature-text reveal">
+        <div class="feature-text">
           <div class="feature-meta"><span class="num">${String(i + 1).padStart(2, "0")}</span><span>·</span><span>${L(p.category)}</span>${p.year ? `<span>· ${p.year}</span>` : ""}</div>
           <h3>${L(p.title)}</h3>
           <p>${L(p.summary)}</p>
           <div class="feature-tags">${p.tags.map((x) => `<span class="tag">${x}</span>`).join("")}</div>
           <a class="link-arrow" href="project.html?p=${p.slug}">${t("featured.case")} ${I.arrow}</a>
         </div>
-        <a class="feature-media reveal d1" href="project.html?p=${p.slug}" aria-label="${L(p.title)} — ${t("featured.open")}">
-          <img class="main" src="${p.cover}" alt="${L(p.title)}" loading="lazy" decoding="async">
+        <a class="feature-media" href="project.html?p=${p.slug}" aria-label="${L(p.title)} — ${t("featured.open")}">
+          <img class="main" src="${p.cover}" alt="${L(p.title)}" decoding="async">
           ${p.hover ? `<img class="alt" src="${p.hover}" alt="" loading="lazy" decoding="async">` : ""}
           <span class="open">${t("featured.open")} ${I.arrow}</span>
         </a>
-      </article>`).join("");
+      </article>
+      </div>`).join("");
+    $("#h-total").textContent = String(P.length).padStart(2, "0");
 
     // Filtros de galería
     const counts = G.reduce((a, g) => ((a[g.cat] = (a[g.cat] || 0) + 1), a), {});
@@ -263,5 +296,5 @@
   applyI18n();
   initLB();
   observeReveals();
-  if (page === "home") parallax();
+  if (page === "home") horizontalWork();
 })();

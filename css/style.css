@@ -193,7 +193,36 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .scroll-cue i { width: 1px; height: 40px; background: linear-gradient(var(--muted), transparent); animation: cue 2.4s var(--ease) infinite; transform-origin: top; }
 @keyframes cue { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
 
-/* ---------- Proyectos destacados (estructura tipo theeugene) ---------- */
+/* ---------- Proyectos destacados: scroll horizontal (estructura tipo theeugene) ---------- */
+/* La altura de .hscroll la define el JS (una pantalla por proyecto). */
+.hscroll { position: relative; height: 500svh; }
+.hscroll-sticky {
+  position: sticky; top: 0; height: 100svh; overflow: hidden;
+  display: flex; flex-direction: column; padding: 112px 0 28px;
+}
+.hscroll .section-head { margin: 0; flex: none; }
+.hscroll-viewport { flex: 1; min-height: 0; position: relative; }
+.hscroll-track { display: flex; height: 100%; will-change: transform; }
+.slide { flex: 0 0 100vw; width: 100vw; height: 100%; display: flex; align-items: center; justify-content: center; }
+.slide .feature { width: min(100% - 48px, var(--max)); }
+.hscroll .feature { min-height: 0; padding: 0; }
+.hscroll .feature-media { max-height: calc(100svh - 250px); width: 100%; margin-left: auto; }
+.hscroll .feature-media img.main { transition: opacity .8s var(--ease); }
+.hprogress { flex: none; display: flex; align-items: center; gap: 16px; font-size: 13px; color: var(--muted); }
+.hbar { position: relative; width: 120px; height: 2px; border-radius: 2px; background: var(--line); overflow: hidden; }
+.hbar i { position: absolute; inset: 0; background: var(--text); transform-origin: left; transform: scaleX(0); }
+.hcount { font-variant-numeric: tabular-nums; letter-spacing: .06em; }
+.hcount b { color: var(--text); font-weight: 500; }
+
+/* Sin animación (o si el usuario la reduce): vuelve a lista vertical */
+.hscroll.static { height: auto; }
+.hscroll.static .hscroll-sticky { position: relative; height: auto; overflow: visible; padding: 120px 0; }
+.hscroll.static .section-head { margin-bottom: 40px; }
+.hscroll.static .hscroll-track { flex-direction: column; transform: none !important; }
+.hscroll.static .slide { width: 100%; flex: none; height: auto; padding: 30px 0; }
+.hscroll.static .hprogress { display: none; }
+.hscroll.static .feature-media { max-height: none; }
+
 .featured-list { display: grid; gap: 40px; }
 .feature {
   display: grid; grid-template-columns: 5fr 7fr; align-items: center; gap: clamp(32px, 6vw, 96px);
@@ -349,6 +378,12 @@ figcaption.cap { padding: 12px 16px; font-size: 13px; color: var(--muted); borde
   .feature, .about-grid, .p-overview, .p-block-head, .p-next { grid-template-columns: 1fr; }
   .feature { min-height: 0; padding: 30px 0 50px; }
   .feature-text { order: 2; }
+  .hscroll-sticky { padding: 92px 0 22px; }
+  .hscroll .feature { gap: 22px; }
+  .hscroll .feature-media { aspect-ratio: 4 / 3; max-height: 38svh; }
+  .hscroll .feature h3 { font-size: clamp(38px, 10vw, 56px); margin: 8px 0 10px; }
+  .hscroll .feature p { font-size: 16px; margin-bottom: 16px; }
+  .hscroll .feature-tags { display: none; }
   .portrait { position: relative; top: 0; max-width: 420px; }
   .contact-cards { grid-template-columns: 1fr; max-width: 520px; }
 }
