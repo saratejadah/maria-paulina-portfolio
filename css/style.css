@@ -244,6 +244,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .hscroll.swipe .feature-media img.main { transform: none; }
 .hhint { display: none; margin-left: auto; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
 .hscroll.swipe .hhint { display: inline; }
+.hscroll.swipe .hprogress { margin-top: 22px; }
 
 /* Sin animación (o si el usuario la reduce): vuelve a lista vertical */
 .hscroll.static { height: auto; }
