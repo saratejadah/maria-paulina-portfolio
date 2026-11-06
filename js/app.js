@@ -1,0 +1,267 @@
+/* ==========================================================================
+   Lógica del sitio: idioma, tema, navegación, render de proyectos y galería.
+   ========================================================================== */
+(() => {
+  const S = window.SITE, P = window.PROJECTS, G = window.GALLERY, C = window.CATEGORIES, D = window.I18N;
+  const $ = (s, el = document) => el.querySelector(s);
+  const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+  const page = document.body.dataset.page;
+
+  /* ---------- Estado: idioma y tema ---------- */
+  const params = new URLSearchParams(location.search);
+  let lang = params.get("lang") || localStorage.getItem("mp-lang") || "es";
+  if (!D[lang]) lang = "es";
+  const t = (k) => D[lang][k] ?? k;
+  const L = (o) => (o && typeof o === "object" ? o[lang] ?? o.es : o ?? "");
+
+  const savedTheme = localStorage.getItem("mp-theme");
+  document.documentElement.dataset.theme = savedTheme || "light"; // claro por defecto
+
+  /* ---------- Iconos ---------- */
+  const I = {
+    sun: '<svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg>',
+    moon: '<svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg>',
+    menu: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 8h16M4 16h16"/></svg>',
+    arrow: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+    back: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>',
+    left: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>',
+    right: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>',
+    close: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>',
+    download: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>',
+    eye: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>',
+    wa: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01Zm-7.01 15.24a8.23 8.23 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c.01 4.54-3.69 8.23-8.23 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29Z"/></svg>',
+    mail: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg>',
+    ig: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/></svg>',
+  };
+
+  /* ---------- Navegación y pie (compartidos) ---------- */
+  const home = page === "home" ? "" : "index.html";
+  function renderChrome() {
+    const nav = $("#site-nav");
+    if (nav) nav.innerHTML = `
+      <a class="brand" href="${home || "#top"}" aria-label="Maria Paulina — inicio">
+        <span class="brand-name">${S.name}</span><span class="brand-role">— 3D Jewelry Designer</span>
+      </a>
+      <nav class="nav-links" id="nav-links">
+        <a href="${home}#work" data-i18n="nav.work"></a>
+        <a href="${home}#gallery" data-i18n="nav.gallery"></a>
+        <a href="${home}#about" data-i18n="nav.about"></a>
+        <a href="${home}#contact" data-i18n="nav.contact"></a>
+      </nav>
+      <div class="nav-tools">
+        <button class="chip-btn lang-toggle" id="lang-toggle" data-i18n-aria="nav.lang"><span data-l="es">ES</span>/<span data-l="en">EN</span></button>
+        <button class="chip-btn theme-toggle" id="theme-toggle" data-i18n-aria="nav.theme">${I.sun}${I.moon}</button>
+        <button class="chip-btn menu-btn" id="menu-btn" data-i18n-aria="nav.menu" aria-expanded="false" aria-controls="nav-links">${I.menu}</button>
+      </div>`;
+    const foot = $("#site-footer");
+    if (foot) foot.innerHTML = `<div class="wrap"><span>© ${new Date().getFullYear()} ${S.fullName}. <span data-i18n="footer.rights"></span></span><a href="#top" data-i18n="footer.top"></a></div>`;
+
+    $("#lang-toggle").addEventListener("click", () => setLang(lang === "es" ? "en" : "es"));
+    $("#theme-toggle").addEventListener("click", () => {
+      const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+      document.documentElement.dataset.theme = next;
+      localStorage.setItem("mp-theme", next);
+    });
+    const navEl = $("#site-nav"), mb = $("#menu-btn");
+    mb.addEventListener("click", () => { const o = navEl.classList.toggle("open"); mb.setAttribute("aria-expanded", o); });
+    $$(".nav-links a").forEach((a) => a.addEventListener("click", () => { navEl.classList.remove("open"); mb.setAttribute("aria-expanded", false); }));
+  }
+
+  /* ---------- Traducción ---------- */
+  function applyI18n() {
+    document.documentElement.lang = lang;
+    $$("[data-i18n]").forEach((el) => (el.innerHTML = t(el.dataset.i18n)));
+    $$("[data-i18n-aria]").forEach((el) => { el.setAttribute("aria-label", t(el.dataset.i18nAria)); el.title = t(el.dataset.i18nAria); });
+    $$(".lang-toggle span").forEach((s) => s.classList.toggle("on", s.dataset.l === lang));
+    const md = $('meta[name="description"]'); if (md) md.content = t("meta.desc");
+  }
+  function setLang(l) {
+    lang = l; localStorage.setItem("mp-lang", l);
+    if (params.has("lang")) { params.delete("lang"); history.replaceState(null, "", location.pathname + (params.toString() ? "?" + params : "") + location.hash); }
+    renderPage(); applyI18n(); observeReveals();
+  }
+
+  /* ---------- Animación de entrada al hacer scroll ---------- */
+  let io;
+  function observeReveals() {
+    if (!("IntersectionObserver" in window)) { $$(".reveal").forEach((e) => e.classList.add("in")); return; }
+    io = io || new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+    $$(".reveal:not(.in)").forEach((e) => io.observe(e));
+  }
+
+  /* Parallax suave de las imágenes destacadas */
+  function parallax() {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let raf = 0;
+    const update = () => {
+      raf = 0; const vh = innerHeight;
+      $$("#featured-list .feature-media img.main").forEach((img) => {
+        const r = img.parentElement.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > vh) return;
+        const p = (r.top + r.height / 2 - vh / 2) / vh; // -1..1
+        img.style.transform = `scale(1.08) translateY(${(p * -24).toFixed(1)}px)`;
+      });
+    };
+    addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
+    update();
+  }
+
+  /* ---------- Contacto ---------- */
+  const waLink = () => `https://wa.me/${S.whatsapp}?text=${encodeURIComponent(t("contact.waMsg"))}`;
+  const fmtPhone = (n) => `+${n.slice(0, 2)} ${n.slice(2, 5)} ${n.slice(5, 8)} ${n.slice(8)}`;
+
+  /* ======================================================================
+     INICIO
+     ====================================================================== */
+  function renderHome() {
+    // Destacados
+    $("#featured-list").innerHTML = P.map((p, i) => `
+      <article class="feature">
+        <div class="feature-text reveal">
+          <div class="feature-meta"><span class="num">${String(i + 1).padStart(2, "0")}</span><span>·</span><span>${L(p.category)}</span>${p.year ? `<span>· ${p.year}</span>` : ""}</div>
+          <h3>${L(p.title)}</h3>
+          <p>${L(p.summary)}</p>
+          <div class="feature-tags">${p.tags.map((x) => `<span class="tag">${x}</span>`).join("")}</div>
+          <a class="link-arrow" href="project.html?p=${p.slug}">${t("featured.case")} ${I.arrow}</a>
+        </div>
+        <a class="feature-media reveal d1" href="project.html?p=${p.slug}" aria-label="${L(p.title)} — ${t("featured.open")}">
+          <img class="main" src="${p.cover}" alt="${L(p.title)}" loading="lazy" decoding="async">
+          ${p.hover ? `<img class="alt" src="${p.hover}" alt="" loading="lazy" decoding="async">` : ""}
+          <span class="open">${t("featured.open")} ${I.arrow}</span>
+        </a>
+      </article>`).join("");
+
+    // Filtros de galería
+    const counts = G.reduce((a, g) => ((a[g.cat] = (a[g.cat] || 0) + 1), a), {});
+    $("#filters").innerHTML = Object.keys(C).filter((k) => k === "all" || counts[k])
+      .map((k) => `<button class="filter${k === currentFilter ? " on" : ""}" data-f="${k}" aria-pressed="${k === currentFilter}">${L(C[k])}<sup>${k === "all" ? G.length : counts[k]}</sup></button>`).join("");
+    $$("#filters .filter").forEach((b) => b.addEventListener("click", () => { currentFilter = b.dataset.f; filterGallery(); }));
+
+    // Galería
+    $("#masonry").innerHTML = G.map((g, i) => `
+      <button class="tile reveal" data-i="${i}" data-cat="${g.cat}">
+        <img src="${g.img}" alt="${L(g.title)}" loading="lazy" decoding="async">
+        <figcaption>${L(g.title)} <span>${L(C[g.cat])}</span></figcaption>
+      </button>`).join("");
+    $$("#masonry .tile").forEach((b) => b.addEventListener("click", () => openLB(+b.dataset.i)));
+    filterGallery();
+
+    // Sobre mí
+    $("#portrait").innerHTML = S.portrait ? `<img src="${S.portrait}" alt="${S.fullName}">` : `<span class="initials">MP</span><span class="note">${t("about.portraitNote")}</span>`;
+    $("#stat-years").textContent = new Date().getFullYear() - 2022 + "+";
+    $("#cv-download").href = S.cv[lang];
+    $("#cv-download").setAttribute("download", S.cv[lang].split("/").pop());
+    $("#cv-view").href = `cv.html?lang=${lang}`;
+
+    // Contacto
+    $("#c-wa").href = waLink(); $("#c-wa-num").textContent = fmtPhone(S.whatsapp);
+    $("#c-mail").href = `mailto:${S.email}`; $("#c-mail-txt").textContent = S.email;
+    $("#c-ig").href = `https://instagram.com/${S.instagram}`; $("#c-ig-txt").textContent = "@" + S.instagram;
+  }
+
+  let currentFilter = "all";
+  function filterGallery() {
+    $$("#filters .filter").forEach((b) => { const on = b.dataset.f === currentFilter; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
+    $$("#masonry .tile").forEach((tile) => tile.classList.toggle("hide", currentFilter !== "all" && tile.dataset.cat !== currentFilter));
+  }
+
+  /* Lightbox de la galería */
+  let lbIndex = 0, lastFocus;
+  const visible = () => $$("#masonry .tile:not(.hide)").map((b) => +b.dataset.i);
+  function openLB(i) {
+    lastFocus = document.activeElement; lbIndex = i; drawLB();
+    $("#lightbox").classList.add("open"); $("#lightbox").removeAttribute("aria-hidden");
+    document.body.style.overflow = "hidden"; $("#lb-close").focus();
+  }
+  function drawLB() {
+    const g = G[lbIndex];
+    $("#lb-img").src = g.img; $("#lb-img").alt = L(g.title);
+    $("#lb-title").textContent = L(g.title); $("#lb-cat").textContent = L(C[g.cat]);
+  }
+  function stepLB(d) { const v = visible(); const k = v.indexOf(lbIndex); lbIndex = v[(k + d + v.length) % v.length]; drawLB(); }
+  function closeLB() { $("#lightbox").classList.remove("open"); $("#lightbox").setAttribute("aria-hidden", "true"); document.body.style.overflow = ""; lastFocus && lastFocus.focus(); }
+  function initLB() {
+    const lb = $("#lightbox"); if (!lb) return;
+    $("#lb-close").innerHTML = I.close; $("#lb-prev").innerHTML = I.left; $("#lb-next").innerHTML = I.right;
+    $("#lb-close").onclick = closeLB; $("#lb-prev").onclick = () => stepLB(-1); $("#lb-next").onclick = () => stepLB(1);
+    lb.addEventListener("click", (e) => { if (e.target === lb) closeLB(); });
+    addEventListener("keydown", (e) => {
+      if (!lb.classList.contains("open")) return;
+      if (e.key === "Escape") closeLB(); if (e.key === "ArrowLeft") stepLB(-1); if (e.key === "ArrowRight") stepLB(1);
+    });
+  }
+
+  /* ======================================================================
+     PÁGINA DE PROYECTO
+     ====================================================================== */
+  const FINISHES = { silver: [0.9, 0.91, 0.92], gold: [0.94, 0.77, 0.42], rose: [0.92, 0.7, 0.63] };
+  function renderProject() {
+    const slug = params.get("p");
+    const i = P.findIndex((p) => p.slug === slug);
+    const root = $("#project");
+    if (i < 0) { root.innerHTML = `<section class="p-hero wrap"><a class="back" href="index.html#work">${I.back}<span>${t("project.back")}</span></a><h1 class="p-title">${t("project.notFound")}</h1></section>`; return; }
+    const p = P[i], n = P[(i + 1) % P.length];
+    document.title = `${L(p.title)} — ${S.name}`;
+    root.innerHTML = `
+      <section class="p-hero wrap">
+        <a class="back" href="index.html#work">${I.back}<span>${t("project.back")}</span></a>
+        <div class="eyebrow reveal">${String(i + 1).padStart(2, "0")} · ${L(p.category)}${p.year ? " · " + p.year : ""}</div>
+        <h1 class="p-title reveal d1">${L(p.title)}</h1>
+        <p class="p-sub reveal d2">${L(p.summary)}</p>
+        <div class="p-cover reveal d2"><img src="${p.cover}" alt="${L(p.title)}"></div>
+      </section>
+      <section class="wrap p-overview">
+        <div class="reveal">${L(p.overview).map((x) => `<p>${x}</p>`).join("")}</div>
+        <dl class="p-facts reveal d1">
+          <div><dt>${t("project.role")}</dt><dd>${L(p.facts.role)}</dd></div>
+          <div><dt>${t("project.client")}</dt><dd>${L(p.facts.client)}</dd></div>
+          <div><dt>${t("project.type")}</dt><dd>${L(p.facts.type)}</dd></div>
+          <div><dt>${t("project.tools")}</dt><dd>${p.facts.tools}</dd></div>
+        </dl>
+      </section>
+      ${p.blocks.map((b) => `
+      <section class="wrap p-block">
+        <div class="p-block-head reveal"><div><span class="eyebrow">${L(b.label)}</span><h2>${L(b.title)}</h2></div><p>${L(b.text)}</p></div>
+        <div class="p-grid">${b.images.map((src, k) => `<figure class="reveal d${k + 1}"><img src="${src}" alt="${L(b.captions)[k] || ""}" loading="lazy"><figcaption class="cap">${L(b.captions)[k] || ""}</figcaption></figure>`).join("")}</div>
+      </section>`).join("")}
+      ${p.model ? `
+      <section class="wrap p-block">
+        <div class="p-block-head reveal"><div><span class="eyebrow">${t("project.model")}</span><h2>${t("project.modelH")}</h2></div><p>${t("project.modelP")}</p></div>
+        <div class="viewer reveal">
+          <model-viewer id="mv" src="${p.model}" alt="${L(p.title)} 3D" camera-controls auto-rotate auto-rotate-delay="1500" rotation-per-second="18deg" interaction-prompt="none" shadow-intensity="0.6" shadow-softness="1" exposure="1.05" environment-image="neutral" touch-action="pan-y" loading="lazy"></model-viewer>
+          <div class="finishes">${Object.keys(FINISHES).map((f, k) => `<button class="finish${k === 0 ? " on" : ""}" data-f="${f}" aria-label="${t("finish." + f)}" title="${t("finish." + f)}" style="background:radial-gradient(circle at 30% 30%,#fff,rgb(${FINISHES[f].map((c) => Math.round(c * 255)).join(",")}) 55%,rgb(${FINISHES[f].map((c) => Math.round(c * 160)).join(",")}))"></button>`).join("")}</div>
+          <span class="hint">${t("project.hint")}</span>
+        </div>
+      </section>` : ""}
+      <section class="wrap p-block">
+        <div class="p-block-head reveal"><div><span class="eyebrow">${t("project.result")}</span><h2>${t("project.resultH")}</h2></div><p></p></div>
+        <figure class="p-wide reveal"><img src="${p.result.image}" alt="${L(p.result.caption)}" loading="lazy"><figcaption class="cap">${L(p.result.caption)}</figcaption></figure>
+      </section>
+      <section class="wrap p-next">
+        <div class="reveal"><span class="eyebrow">${t("project.next")}</span><h3>${L(n.title)}</h3><a class="link-arrow" href="project.html?p=${n.slug}">${t("featured.case")} ${I.arrow}</a></div>
+        <a class="feature-media reveal d1" href="project.html?p=${n.slug}"><img class="main" src="${n.cover}" alt="${L(n.title)}" loading="lazy"><span class="open">${t("featured.open")} ${I.arrow}</span></a>
+      </section>`;
+    initFinishes();
+  }
+  function initFinishes() {
+    const mv = $("#mv"); if (!mv) return;
+    const apply = (f) => {
+      if (!mv.model) return;
+      mv.model.materials.forEach((m) => { if (m.name.startsWith("metal")) { m.pbrMetallicRoughness.setBaseColorFactor([...FINISHES[f], 1]); } });
+    };
+    $$(".finish").forEach((b) => b.addEventListener("click", () => { $$(".finish").forEach((x) => x.classList.toggle("on", x === b)); apply(b.dataset.f); }));
+    mv.addEventListener("load", () => apply($(".finish.on").dataset.f));
+  }
+
+  /* ---------- Arranque ---------- */
+  function renderPage() {
+    if (page === "home") renderHome();
+    if (page === "project") renderProject();
+  }
+  renderChrome();
+  renderPage();
+  applyI18n();
+  initLB();
+  observeReveals();
+  if (page === "home") parallax();
+})();

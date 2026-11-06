@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Maria Paulina — 3D Jewelry Designer</title>
+  <meta name="description" content="Portafolio de Maria Paulina, diseñadora industrial y modeladora 3D de joyería.">
+  <meta name="theme-color" content="#e3e4e2">
+  <meta property="og:title" content="Maria Paulina — 3D Jewelry Designer">
+  <meta property="og:description" content="Portafolio de modelado 3D de joyería: anillos, engastes, piezas orgánicas, pulseras y mecanismos.">
+  <meta property="og:image" content="assets/img/projects/halo-cover.webp">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <script>try{var t=localStorage.getItem("mp-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="stylesheet" href="css/style.css">
+  <script type="module" src="js/vendor/model-viewer.min.js"></script>
+</head>
+<body data-page="home" id="top">
+  <header class="nav" id="site-nav"></header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner wrap">
+        <span class="eyebrow reveal" data-i18n="hero.eyebrow"></span>
+        <model-viewer class="hero-object reveal d1" src="assets/models/hero-ring.glb" alt="Anillo 3D" auto-rotate rotation-per-second="14deg" camera-orbit="25deg 72deg 105%" field-of-view="26deg" shadow-intensity="0.9" shadow-softness="1" exposure="1.1" environment-image="neutral" interaction-prompt="none" disable-zoom disable-pan camera-controls touch-action="pan-y"></model-viewer>
+        <h1 class="reveal d2">Maria Paulina<span class="sub">3D Jewelry <em>Designer</em></span></h1>
+        <p class="lead reveal d3" data-i18n="hero.lead"></p>
+        <div class="hero-ctas reveal d3">
+          <a class="btn" href="#work" data-i18n="hero.cta1"></a>
+          <a class="btn ghost" href="#contact" data-i18n="hero.cta2"></a>
+        </div>
+      </div>
+      <a class="scroll-cue" href="#work"><span data-i18n="hero.scroll"></span><i></i></a>
+    </section>
+
+    <!-- PROYECTOS DESTACADOS -->
+    <section class="section" id="work">
+      <div class="wrap">
+        <div class="section-head reveal"><h2 data-i18n="featured.title"></h2></div>
+        <div class="featured-list" id="featured-list"></div>
+      </div>
+    </section>
+
+    <!-- GALERÍA -->
+    <section class="section" id="gallery">
+      <div class="wrap">
+        <div class="section-head reveal"><h2 data-i18n="gallery.title"></h2></div>
+        <p class="gallery-intro reveal" data-i18n="gallery.intro"></p>
+        <div class="filters reveal" id="filters" role="group"></div>
+        <div class="masonry" id="masonry"></div>
+      </div>
+    </section>
+
+    <!-- SOBRE MÍ -->
+    <section class="section about" id="about">
+      <div class="wrap">
+        <div class="section-head reveal"><h2 data-i18n="about.title"></h2></div>
+        <div class="about-grid">
+          <div class="portrait reveal" id="portrait"></div>
+          <div>
+            <h3 class="reveal" data-i18n="about.h"></h3>
+            <p class="reveal" data-i18n="about.p1"></p>
+            <p class="reveal" data-i18n="about.p2"></p>
+            <p class="reveal" data-i18n="about.p3"></p>
+            <div class="stats">
+              <div class="stat glass reveal"><b id="stat-years">4+</b><span data-i18n="about.s1"></span></div>
+              <div class="stat glass reveal d1"><b>300+</b><span data-i18n="about.s2"></span></div>
+              <div class="stat glass reveal d2"><b>3D → Au</b><span data-i18n="about.s3"></span></div>
+            </div>
+            <p class="tools-title reveal" data-i18n="about.tools"></p>
+            <div class="tools reveal">
+              <span class="tag">Rhinoceros</span><span class="tag">Grasshopper Gold</span><span class="tag">Grasshopper</span>
+              <span class="tag">ZBrush</span><span class="tag">Peacock</span><span class="tag">KeyShot</span><span class="tag">Chitubox</span>
+            </div>
+            <div class="cv-actions reveal">
+              <a class="btn accent" id="cv-download" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><span data-i18n="about.cv"></span></a>
+              <a class="btn ghost" id="cv-view" href="cv.html" target="_blank" rel="noopener"><span data-i18n="about.cvView"></span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="section contact" id="contact">
+      <div class="wrap">
+        <div class="section-head reveal"><h2 data-i18n="contact.title"></h2></div>
+        <h2 class="big reveal" data-i18n="contact.h"></h2>
+        <p class="reveal" data-i18n="contact.p"></p>
+        <div class="contact-cards">
+          <a class="contact-card glass reveal" id="c-wa" href="#" target="_blank" rel="noopener">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.030-5.14-2.9-7.01Zm-7.01 15.24a8.23 8.23 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.040-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c.01 4.54-3.69 8.23-8.23 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.050.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29Z"/></svg></span>
+            <div><b data-i18n="contact.wa"></b><span id="c-wa-num"></span></div>
+          </a>
+          <a class="contact-card glass reveal d1" id="c-mail" href="#">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg></span>
+            <div><b data-i18n="contact.mail"></b><span id="c-mail-txt"></span></div>
+          </a>
+          <a class="contact-card glass reveal d2" id="c-ig" href="#" target="_blank" rel="noopener">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/></svg></span>
+            <div><b data-i18n="contact.ig"></b><span id="c-ig-txt"></span></div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <!-- Visor de la galería -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="lb-title">
+    <div class="lb-card">
+      <div class="lb-img"><img id="lb-img" alt=""></div>
+      <div class="lb-bar">
+        <div><h4 id="lb-title"></h4><p id="lb-cat"></p></div>
+        <div class="lb-nav">
+          <button class="round" id="lb-prev" data-i18n-aria="lb.prev"></button>
+          <button class="round" id="lb-next" data-i18n-aria="lb.next"></button>
+          <button class="round" id="lb-close" data-i18n-aria="lb.close"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
