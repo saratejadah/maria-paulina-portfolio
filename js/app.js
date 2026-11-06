@@ -279,10 +279,12 @@
     document.title = `${L(p.title)} — ${S.name}`;
     root.innerHTML = `
       <section class="p-hero wrap">
-        <a class="back" href="index.html#work">${I.back}<span>${t("project.back")}</span></a>
-        <div class="eyebrow reveal">${String(i + 1).padStart(2, "0")} · ${L(p.category)}${p.year ? " · " + p.year : ""}</div>
-        <h1 class="p-title reveal d1">${L(p.title)}</h1>
-        <p class="p-sub reveal d2">${L(p.summary)}</p>
+        <div class="p-hero-text">
+          <a class="back" href="index.html#work">${I.back}<span>${t("project.back")}</span></a>
+          <div class="eyebrow reveal">${String(i + 1).padStart(2, "0")} · ${L(p.category)}${p.year ? " · " + p.year : ""}</div>
+          <h1 class="p-title reveal d1">${L(p.title)}</h1>
+          <p class="p-sub reveal d2">${L(p.summary)}</p>
+        </div>
         <div class="p-cover reveal d2"><img src="${p.cover}" alt="${L(p.title)}"></div>
       </section>
       <section class="wrap p-overview">
