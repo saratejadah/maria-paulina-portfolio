@@ -173,16 +173,16 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .section-head h2 { margin: 0; font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 30px; color: var(--text-2); }
 
 /* ---------- Hero ---------- */
-.hero { min-height: 100svh; display: grid; place-items: center; text-align: center; padding: 110px 0 120px; position: relative; }
+.hero { min-height: 100svh; display: grid; place-items: center; text-align: center; padding: 100px 0 96px; position: relative; }
 .hero-inner { display: grid; justify-items: center; gap: 8px; }
 .hero h1 {
   margin: 0; font-family: var(--serif); font-weight: 400;
-  font-size: clamp(64px, 11vw, 168px); line-height: 0.9; letter-spacing: -0.025em;
+  font-size: clamp(56px, min(11vw, 15svh), 168px); line-height: 0.9; letter-spacing: -0.025em;
 }
-.hero h1 .sub { display: block; font-style: italic; color: var(--muted); font-size: 0.42em; letter-spacing: -0.01em; margin-top: 18px; }
+.hero h1 .sub { display: block; font-style: italic; color: var(--muted); font-size: 0.42em; letter-spacing: -0.01em; margin-top: min(18px, 2svh); }
 .hero h1 .sub em { color: var(--accent); font-style: italic; }
 .hero-object {
-  width: min(520px, 86vw); height: min(380px, 64vw); margin: 0 auto 14px;
+  width: min(520px, 86vw); height: min(380px, 64vw, 36svh); margin: 0 auto min(14px, 1.5svh);
   --poster-color: transparent; background: transparent;
 }
 .hero-object::part(default-progress-bar) { display: none; }
@@ -191,6 +191,16 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .scroll-cue { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); display: grid; justify-items: center; gap: 10px; }
 .scroll-cue i { width: 1px; height: 40px; background: linear-gradient(var(--muted), transparent); animation: cue 2.4s var(--ease) infinite; transform-origin: top; }
 @keyframes cue { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
+
+/* Pantallas de poca altura (portátiles con escalado de Windows al 125–150%) */
+@media (max-height: 780px) and (min-width: 600px) {
+  .hero { padding: 96px 0 70px; }
+  .hero-object { height: min(380px, 64vw, 31svh); }
+  .hero h1 { font-size: clamp(52px, min(11vw, 14svh), 168px); }
+  .hero p.lead { font-size: 16px; max-width: 520px; margin-top: 4px; }
+  .scroll-cue { bottom: 16px; gap: 6px; }
+  .scroll-cue i { height: 28px; }
+}
 
 /* ---------- Proyectos destacados: scroll horizontal (estructura tipo theeugene) ---------- */
 /* La altura de .hscroll la define el JS (una pantalla por proyecto). */
