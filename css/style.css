@@ -463,7 +463,13 @@ figcaption.cap { padding: 12px 16px; font-size: 13px; color: var(--muted); borde
 @media (max-width: 600px) {
   body { font-size: 16px; }
   .wrap { width: min(100% - 32px, var(--max)); }
-  .section { padding: 84px 0; }
+  .section { padding: 44px 0; }
+  .section-head { margin-bottom: 32px; }
+  .hscroll.swipe .hscroll-sticky { padding: 44px 0 28px; }
+  .hscroll.swipe .section-head { margin-bottom: 0; }
+  .gallery-intro { margin: -8px auto 24px; }
+  .filters { margin-bottom: 28px; }
+  .contact { padding-bottom: 56px; }
   .nav { padding: 10px 10px 10px 18px; top: 12px; }
   .brand-name { font-size: 22px; }
   .stats { grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
