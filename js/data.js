@@ -35,12 +35,6 @@ window.PROJECTS = [
     cover: "assets/img/projects/interbeing-cover.webp",
     hover: "assets/img/projects/interbeing-c.webp",
     model: "assets/models/interbeing.glb",
-    facts: {
-      role: { es: "Modelado 3D y codiseño del cierre", en: "3D modeling & clasp co-design" },
-      client: { es: "Colaboración con Claudia", en: "Collaboration with Claudia" },
-      type: { es: "Pulsera articulada", en: "Articulated bracelet" },
-      tools: "Rhinoceros · Grasshopper Gold · KeyShot",
-    },
     overview: {
       es: ["Interbeing parte de un conjunto de pétalos ya modelados. Mi trabajo fue convertirlos en una pulsera que se pudiera fabricar: definir cómo se unen los módulos, cómo se mueven y cómo cierra la pieza.",
            "El cierre se codiseñó con la diseñadora para que quedara escondido dentro del ritmo de los pétalos, sin romper la lectura de la pulsera."],
@@ -48,9 +42,7 @@ window.PROJECTS = [
            "The clasp was co-designed with the designer so it would hide within the rhythm of the petals without breaking the bracelet's flow."],
     },
     blocks: [
-      { label: { es: "Reto", en: "Challenge" }, title: { es: "Que el cierre no se note", en: "A clasp you don't notice" },
-        text: { es: "Unir piezas orgánicas con tolerancias reales de fundición, manteniendo el movimiento y la comodidad en la muñeca.", en: "Joining organic parts with real casting tolerances while keeping movement and comfort on the wrist." },
-        images: ["assets/img/projects/interbeing-a.webp", "assets/img/projects/interbeing-b.webp"],
+      { images: ["assets/img/projects/interbeing-a.webp", "assets/img/projects/interbeing-b.webp"],
         captions: { es: ["Estudio de eslabón", "Detalle del mecanismo"], en: ["Link study", "Mechanism detail"] } },
     ],
     result: { image: "assets/img/projects/interbeing-cover.webp", caption: { es: "Render final", en: "Final render" } },
@@ -68,12 +60,6 @@ window.PROJECTS = [
     cover: "assets/img/projects/escultorica-cover.webp",
     hover: "assets/img/projects/escultorica-c.webp",
     model: "assets/models/escultorica.glb",
-    facts: {
-      role: { es: "Modelado 3D orgánico", en: "Organic 3D modeling" },
-      client: { es: "Colaboración con Claudia", en: "Collaboration with Claudia" },
-      type: { es: "Colección: Flock, Serpi, Unidad, Conciliación, Radiant", en: "Collection: Flock, Serpi, Unidad, Conciliación, Radiant" },
-      tools: "Rhinoceros · ZBrush · Grasshopper",
-    },
     overview: {
       es: ["Una colección que nace de piezas hechas a mano en arcilla. El reto fue conservar la huella de la escultura y, al mismo tiempo, obtener modelos limpios y listos para producción.",
            "Desarrollé módulos repetitivos que se adaptan a distintas tipologías: anillos, dijes y aretes de la misma familia."],
@@ -81,9 +67,7 @@ window.PROJECTS = [
            "I developed repeating modules that adapt to different typologies: rings, pendants and earrings from the same family."],
     },
     blocks: [
-      { label: { es: "Proceso", en: "Process" }, title: { es: "De la mano al archivo", en: "From hand to file" },
-        text: { es: "Referencias físicas, interpretación de volúmenes y reconstrucción en superficies controladas para fabricación.", en: "Physical references, volume interpretation and rebuilding with controlled surfaces for manufacturing." },
-        images: ["assets/img/projects/escultorica-a.webp", "assets/img/projects/escultorica-b.webp"],
+      { images: ["assets/img/projects/escultorica-a.webp", "assets/img/projects/escultorica-b.webp"],
         captions: { es: ["Vista frontal", "Volumen y textura"], en: ["Front view", "Volume and texture"] } },
     ],
     result: { image: "assets/img/projects/escultorica-cover.webp", caption: { es: "Pieza de la colección", en: "Piece from the collection" } },
@@ -101,12 +85,6 @@ window.PROJECTS = [
     cover: "assets/img/projects/halo-cover.webp",
     hover: "assets/img/projects/halo-c.webp",
     model: "assets/models/halo.glb",
-    facts: {
-      role: { es: "Modelado técnico de engastes", en: "Technical setting modeling" },
-      client: { es: "Encargo personalizado", en: "Custom commission" },
-      type: { es: "Anillo con engaste pavé", en: "Pavé-set ring" },
-      tools: "Rhinoceros · Grasshopper Gold · Peacock",
-    },
     overview: {
       es: ["Los anillos con muchos engastes exigen precisión: distribución de piedras, grosor de metal, uñas y asientos.",
            "Con Grasshopper Gold, la distribución es paramétrica: si cambia la talla o el tamaño de piedra, el anillo se ajusta sin rehacer el modelo."],
@@ -114,9 +92,7 @@ window.PROJECTS = [
            "With Grasshopper Gold the layout is parametric: if the ring size or stone size changes, the model adapts without being rebuilt."],
     },
     blocks: [
-      { label: { es: "Técnica", en: "Technique" }, title: { es: "Precisión en cada piedra", en: "Precision in every stone" },
-        text: { es: "Distribución paramétrica de piedras, asientos y uñas, revisados para impresión en resina y fundición.", en: "Parametric layout of stones, seats and prongs, checked for resin printing and casting." },
-        images: ["assets/img/projects/halo-a.webp", "assets/img/projects/halo-b.webp"],
+      { images: ["assets/img/projects/halo-a.webp", "assets/img/projects/halo-b.webp"],
         captions: { es: ["Vista lateral", "Detalle del pavé"], en: ["Side view", "Pavé detail"] } },
     ],
     result: { image: "assets/img/projects/halo-cover.webp", caption: { es: "Render final", en: "Final render" } },
@@ -134,12 +110,6 @@ window.PROJECTS = [
     cover: "assets/img/projects/ceramica-cover.webp",
     hover: "assets/img/projects/ceramica-c.webp",
     model: "assets/models/ceramica.glb",
-    facts: {
-      role: { es: "Adaptación y modelado 3D", en: "Adaptation & 3D modeling" },
-      client: { es: "Proyecto personal", en: "Personal project" },
-      type: { es: "Dije / montura para cerámica", en: "Pendant / ceramic mount" },
-      tools: "Rhinoceros · KeyShot · Escaneo 3D",
-    },
     overview: {
       es: ["El punto de partida es un objeto que ya existe. Lo digitalizo, estudio su forma y diseño la estructura de metal que lo sostiene sin ocultarlo.",
            "El resultado une dos oficios: la cerámica y la joyería."],
@@ -147,9 +117,7 @@ window.PROJECTS = [
            "The result brings two crafts together: ceramics and jewelry."],
     },
     blocks: [
-      { label: { es: "Proceso", en: "Process" }, title: { es: "Diseñar alrededor de un objeto", en: "Designing around an object" },
-        text: { es: "Escaneo, limpieza de la malla y modelado de la montura con medidas reales de la pieza.", en: "Scanning, mesh cleanup and modeling the mount to the piece's real dimensions." },
-        images: ["assets/img/projects/ceramica-a.webp", "assets/img/projects/ceramica-b.webp"],
+      { images: ["assets/img/projects/ceramica-a.webp", "assets/img/projects/ceramica-b.webp"],
         captions: { es: ["Estudio de la forma", "Montura en metal"], en: ["Form study", "Metal mount"] } },
     ],
     result: { image: "assets/img/projects/ceramica-cover.webp", caption: { es: "Render final", en: "Final render" } },
@@ -167,12 +135,6 @@ window.PROJECTS = [
     cover: "assets/img/projects/cruz-cover.webp",
     hover: "assets/img/projects/cruz-c.webp",
     model: "assets/models/cruz.glb",
-    facts: {
-      role: { es: "Diseño y modelado 3D", en: "Design & 3D modeling" },
-      client: { es: "Encargo comercial", en: "Commercial commission" },
-      type: { es: "Dije religioso", en: "Religious pendant" },
-      tools: "Rhinoceros · Grasshopper Gold · Chitubox",
-    },
     overview: {
       es: ["Las cruces son de las piezas más pedidas. Esta versión busca un equilibrio entre lo clásico y lo contemporáneo.",
            "El archivo se preparó para impresión en resina, con soportes y orientación pensados para obtener la mejor superficie."],
@@ -180,9 +142,7 @@ window.PROJECTS = [
            "The file was prepared for resin printing, with supports and orientation chosen for the best surface finish."],
     },
     blocks: [
-      { label: { es: "Producción", en: "Production" }, title: { es: "Lista para fabricar", en: "Ready to manufacture" },
-        text: { es: "Revisión de espesores, peso estimado y preparación del STL para impresión y fundición.", en: "Thickness checks, weight estimation and STL preparation for printing and casting." },
-        images: ["assets/img/projects/cruz-a.webp", "assets/img/projects/cruz-b.webp"],
+      { images: ["assets/img/projects/cruz-a.webp", "assets/img/projects/cruz-b.webp"],
         captions: { es: ["Vista frontal", "Perfil"], en: ["Front view", "Profile"] } },
     ],
     result: { image: "assets/img/projects/cruz-cover.webp", caption: { es: "Render final", en: "Final render" } },

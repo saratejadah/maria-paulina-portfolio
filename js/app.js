@@ -287,16 +287,9 @@
       </section>
       <section class="wrap p-overview">
         <div class="reveal">${L(p.overview).map((x) => `<p>${x}</p>`).join("")}</div>
-        <dl class="p-facts reveal d1">
-          <div><dt>${t("project.role")}</dt><dd>${L(p.facts.role)}</dd></div>
-          <div><dt>${t("project.client")}</dt><dd>${L(p.facts.client)}</dd></div>
-          <div><dt>${t("project.type")}</dt><dd>${L(p.facts.type)}</dd></div>
-          <div><dt>${t("project.tools")}</dt><dd>${p.facts.tools}</dd></div>
-        </dl>
       </section>
       ${p.blocks.map((b) => `
       <section class="wrap p-block">
-        <div class="p-block-head reveal"><div><span class="eyebrow">${L(b.label)}</span><h2>${L(b.title)}</h2></div><p>${L(b.text)}</p></div>
         <div class="p-grid">${b.images.map((src, k) => `<figure class="reveal d${k + 1}"><img src="${src}" alt="${L(b.captions)[k] || ""}" loading="lazy"><figcaption class="cap">${L(b.captions)[k] || ""}</figcaption></figure>`).join("")}</div>
       </section>`).join("")}
       ${p.model ? `
