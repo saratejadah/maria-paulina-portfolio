@@ -102,7 +102,11 @@
     const range = () => sec.offsetHeight - innerHeight;
     let raf = 0, current = -1;
 
-    const size = () => { sec.style.height = `calc(${n()} * 100svh)`; };
+    // Altura de la sección: una pantalla + 60% de pantalla por cada proyecto extra
+    // (en celular, un deslizamiento corto basta para cambiar de proyecto).
+    const size = () => { sec.style.height = `calc(100svh + ${Math.max(0, n() - 1)} * 60svh)`; };
+    const topOf = () => sec.getBoundingClientRect().top + scrollY;
+    const posOf = (i) => topOf() + (n() > 1 ? (i / (n() - 1)) * range() : 0);
     const update = () => {
       raf = 0;
       const count = n(); if (!count) return;
@@ -122,9 +126,40 @@
       const s = e.target.closest(".slide"); if (!s) return;
       const i = [...track.children].indexOf(s);
       vp.scrollLeft = 0;
-      const top = sec.getBoundingClientRect().top + scrollY;
-      scrollTo({ top: top + (n() > 1 ? (i / (n() - 1)) * range() : 0), behavior: "auto" });
+      scrollTo({ top: posOf(i), behavior: "auto" });
     });
+
+    // Rueda del mouse / trackpad: un gesto = un proyecto. Mientras la sección está
+    // fija, cada movimiento de rueda salta al proyecto siguiente o anterior, y se
+    // ignoran los eventos restantes del mismo gesto (inercia del trackpad).
+    let locked = false, lockStart = 0, lastWheel = 0;
+    addEventListener("wheel", (e) => {
+      if (e.ctrlKey || Math.abs(e.deltaY) < Math.abs(e.deltaX)) return; // zoom o scroll lateral
+      const r = sec.getBoundingClientRect();
+      const pinned = r.top <= 1 && r.bottom >= innerHeight - 1;
+      const now = performance.now();
+      if (!pinned) {
+        // Al entrar a la sección, detenerse exactamente en el primer (o último) proyecto
+        const enteringDown = e.deltaY > 0 && r.top > 1 && r.top - e.deltaY < 0;
+        const enteringUp = e.deltaY < 0 && r.bottom < innerHeight - 1 && r.bottom - e.deltaY > innerHeight;
+        if (!locked && (enteringDown || enteringUp)) {
+          e.preventDefault();
+          locked = true; lockStart = lastWheel = now;
+          scrollTo({ top: posOf(enteringDown ? 0 : n() - 1), behavior: "auto" });
+        }
+        return;
+      }
+      if (current < 0) return;
+      if (locked) {
+        if (now - lockStart > 700 && now - lastWheel > 180) locked = false;
+        else { lastWheel = now; e.preventDefault(); return; }
+      }
+      const dir = Math.sign(e.deltaY), next = current + dir;
+      if (!dir || next < 0 || next > n() - 1) return; // en los extremos, el scroll sigue normal
+      e.preventDefault();
+      locked = true; lockStart = lastWheel = now;
+      scrollTo({ top: posOf(next), behavior: "auto" });
+    }, { passive: false });
     addEventListener("scroll", tick, { passive: true });
     addEventListener("resize", () => { size(); tick(); });
     size(); update();
