@@ -191,7 +191,7 @@ window.PROJECTS = [
 
 /* --------------------------------------------------------------------------
    GALERÍA — variedad de proyectos. Categorías: anillos, dijes, pulseras,
-   organico, religiosa, ceramica. Para agregar una pieza, copiar una línea.
+   organico, religiosa. Para agregar una pieza, copiar una línea.
    -------------------------------------------------------------------------- */
 window.CATEGORIES = {
   all: { es: "Todo", en: "All" },
@@ -199,7 +199,6 @@ window.CATEGORIES = {
   organico: { es: "Orgánico", en: "Organic" },
   pulseras: { es: "Pulseras y eslabones", en: "Bracelets & links" },
   religiosa: { es: "Cruces y dijes", en: "Crosses & pendants" },
-  ceramica: { es: "Cerámica", en: "Ceramics" },
 };
 
 window.GALLERY = (() => {
@@ -209,11 +208,10 @@ window.GALLERY = (() => {
     cross: ["religiosa", { es: "Cruz con engastes", en: "Set cross" }],
     leaf: ["organico", { es: "Hoja", en: "Leaf" }],
     links: ["pulseras", { es: "Eslabón y broche", en: "Link & clasp" }],
-    vessel: ["ceramica", { es: "Vasija engastada", en: "Set vessel" }],
   };
-  const order = ["solitaire", "pave", "cross", "leaf", "links", "vessel"];
+  const order = ["solitaire", "pave", "cross", "leaf", "links"];
   const items = [];
-  for (let i = 0; i < 24; i++) {
+  for (let i = 0; i < 20; i++) {
     const [cat, title] = T[order[Math.floor(i / 4)]];
     items.push({ img: `assets/img/projects/g-${String(i).padStart(2, "0")}.webp`, cat, title: { es: `${title.es} ${String((i % 4) + 1).padStart(2, "0")}`, en: `${title.en} ${String((i % 4) + 1).padStart(2, "0")}` } });
   }

@@ -90,35 +90,30 @@
   }
 
   /* Proyectos destacados en horizontal: la sección se queda fija y el scroll
-     vertical mueve los proyectos de lado. Cada proyecto se "detiene" un momento
-     antes de pasar al siguiente. */
+     vertical decide qué proyecto se muestra. Nunca se queda a la mitad: al
+     pasar cierto punto del scroll, el siguiente proyecto entra completo con
+     una transición. */
   function horizontalWork() {
     const sec = $("#work"), vp = $(".hscroll-viewport"), track = $("#featured-list");
     if (!sec || !track) return;
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) { sec.classList.add("static"); return; }
     const n = () => track.children.length;
-    const HOLD = 0.3; // fracción de cada tramo en la que el proyecto queda quieto
-    const ease = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
     const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
     const range = () => sec.offsetHeight - innerHeight;
-    let raf = 0;
+    let raf = 0, current = -1;
 
     const size = () => { sec.style.height = `calc(${n()} * 100svh)`; };
     const update = () => {
       raf = 0;
       const count = n(); if (!count) return;
       const p = clamp(-sec.getBoundingClientRect().top / Math.max(1, range()), 0, 1);
-      const u = p * (count - 1), k = Math.min(Math.floor(u), count - 2), f = u - k;
-      const x = count === 1 ? 0 : k + ease(clamp((f - HOLD / 2) / (1 - HOLD), 0, 1));
-      track.style.transform = `translate3d(${(-x * 100).toFixed(3)}vw,0,0)`;
-      // Profundidad: la imagen se mueve un poco más lento que la tarjeta
-      [...track.children].forEach((s, i) => {
-        const img = s.querySelector("img.main");
-        if (img) img.style.transform = `scale(1.1) translateX(${((i - x) * -8).toFixed(2)}%)`;
-      });
-      const cur = Math.round(x);
-      $("#h-current").textContent = String(cur + 1).padStart(2, "0");
-      $("#h-bar").style.transform = `scaleX(${(count === 1 ? 1 : x / (count - 1)).toFixed(4)})`;
+      const idx = count === 1 ? 0 : clamp(Math.round(p * (count - 1)), 0, count - 1);
+      if (idx === current) return;
+      current = idx;
+      track.style.transform = `translate3d(${-idx * 100}vw,0,0)`;
+      [...track.children].forEach((s, i) => { s.classList.toggle("on", i === idx); });
+      $("#h-current").textContent = String(idx + 1).padStart(2, "0");
+      $("#h-bar").style.transform = `scaleX(${count === 1 ? 1 : idx / (count - 1)})`;
     };
     const tick = () => { if (!raf) raf = requestAnimationFrame(update); };
 
@@ -133,7 +128,7 @@
     addEventListener("scroll", tick, { passive: true });
     addEventListener("resize", () => { size(); tick(); });
     size(); update();
-    horizontalWork.refresh = () => { size(); update(); };
+    horizontalWork.refresh = () => { size(); current = -1; update(); };
   }
 
   /* ---------- Contacto ---------- */
@@ -181,7 +176,6 @@
 
     // Sobre mí
     $("#portrait").innerHTML = S.portrait ? `<img src="${S.portrait}" alt="${S.fullName}">` : `<span class="initials">MP</span><span class="note">${t("about.portraitNote")}</span>`;
-    $("#stat-years").textContent = new Date().getFullYear() - 2022 + "+";
     $("#cv-download").href = S.cv[lang];
     $("#cv-download").setAttribute("download", S.cv[lang].split("/").pop());
     $("#cv-view").href = `cv.html?lang=${lang}`;

@@ -201,8 +201,13 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 .hscroll .section-head { margin: 0; flex: none; }
 .hscroll-viewport { flex: 1; min-height: 0; position: relative; }
-.hscroll-track { display: flex; height: 100%; will-change: transform; }
+.hscroll-track { display: flex; height: 100%; will-change: transform; transition: transform 1s cubic-bezier(0.65, 0, 0.35, 1); }
 .slide { flex: 0 0 100vw; width: 100vw; height: 100%; display: flex; align-items: center; justify-content: center; }
+/* El texto y la imagen del proyecto que entra aparecen con un leve desfase */
+.slide .feature-text, .slide .feature-media { transition: opacity .7s var(--ease) .35s, transform .9s var(--ease) .3s; }
+.slide:not(.on) .feature-text { opacity: 0; transform: translateX(40px); }
+.slide:not(.on) .feature-media { opacity: .4; transform: scale(.96); }
+.hbar i { transition: transform .8s var(--ease); }
 .slide .feature { width: min(100% - 48px, var(--max)); }
 .hscroll .feature { min-height: 0; padding: 0; }
 .hscroll .feature-media { max-height: calc(100svh - 250px); width: 100%; margin-left: auto; }
@@ -305,7 +310,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .stat { padding: 22px; border-radius: var(--radius-sm); }
 .stat b { display: block; font-family: var(--serif); font-weight: 400; font-size: 44px; line-height: 1; margin-bottom: 8px; }
 .stat span { font-size: 13px; color: var(--muted); line-height: 1.4; display: block; }
-.tools-title { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin: 0 0 14px; font-weight: 500; }
+.about .tools-title, .tools-title { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin: 0 0 14px; font-weight: 500; }
 .tools { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
 .tools .tag { font-size: 14px; padding: 8px 14px; }
 .cv-actions { display: flex; gap: 12px; flex-wrap: wrap; }
