@@ -162,22 +162,15 @@ window.CATEGORIES = {
 };
 
 window.GALLERY = (() => {
-  const T = {
-    solitaire: ["anillos", { es: "Solitario esmeralda", en: "Emerald solitaire" }],
-    pave: ["anillos", { es: "Argolla pavé", en: "Pavé band" }],
-    cross: ["religiosa", { es: "Cruz con engastes", en: "Set cross" }],
-    leaf: ["organico", { es: "Hoja", en: "Leaf" }],
-    links: ["pulseras", { es: "Eslabón y broche", en: "Link & clasp" }],
-  };
-  const order = ["solitaire", "pave", "cross", "leaf", "links"];
-  const items = [];
-  for (let i = 0; i < 20; i++) {
-    const [cat, title] = T[order[Math.floor(i / 4)]];
-    items.push({ img: `assets/img/projects/g-${String(i).padStart(2, "0")}.webp`, cat, title: { es: `${title.es} ${String((i % 4) + 1).padStart(2, "0")}`, en: `${title.en} ${String((i % 4) + 1).padStart(2, "0")}` } });
-  }
-  // Mezclar (siempre en el mismo orden) para que la galería se vea variada
-  let seed = 7;
-  const rand = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
-  for (let i = items.length - 1; i > 0; i--) { const j = Math.floor(rand() * (i + 1)); [items[i], items[j]] = [items[j], items[i]]; }
-  return items;
+  // Piezas de Maria Paulina. Para agregar una: poner la imagen (ideal sin fondo, .webp) en
+  // assets/img/gallery/ y copiar una línea.
+  const real = [
+    { img: "assets/img/gallery/anillo-ancla.webp", cat: "anillos", title: { es: "Anillo ancla", en: "Anchor ring" } },
+    { img: "assets/img/gallery/anillo-corona.webp", cat: "anillos", title: { es: "Anillo corona con zafiros", en: "Sapphire crown ring" } },
+    { img: "assets/img/gallery/anillo-luna-ballena.webp", cat: "organico", title: { es: "Anillo luna y ballena", en: "Moon & whale ring" } },
+    { img: "assets/img/gallery/anillo-cupula-zafiros.webp", cat: "anillos", title: { es: "Anillo cúpula de zafiros", en: "Sapphire dome ring" } },
+    { img: "assets/img/gallery/dije-sagitario.webp", cat: "religiosa", title: { es: "Dije Sagitario", en: "Sagittarius pendant" } },
+  ];
+
+  return real;
 })();
