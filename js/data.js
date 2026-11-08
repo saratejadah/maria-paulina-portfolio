@@ -165,11 +165,11 @@ window.GALLERY = (() => {
   // Piezas de Maria Paulina. Para agregar una: poner la imagen (ideal sin fondo, .webp) en
   // assets/img/gallery/ y copiar una línea.
   const real = [
-    { img: "assets/img/gallery/anillo-ancla.webp", cat: "anillos", title: { es: "Anillo ancla", en: "Anchor ring" } },
-    { img: "assets/img/gallery/anillo-corona.webp", cat: "anillos", title: { es: "Anillo corona con zafiros", en: "Sapphire crown ring" } },
-    { img: "assets/img/gallery/anillo-luna-ballena.webp", cat: "organico", title: { es: "Anillo luna y ballena", en: "Moon & whale ring" } },
-    { img: "assets/img/gallery/anillo-cupula-zafiros.webp", cat: "anillos", title: { es: "Anillo cúpula de zafiros", en: "Sapphire dome ring" } },
-    { img: "assets/img/gallery/dije-sagitario.webp", cat: "religiosa", title: { es: "Dije Sagitario", en: "Sagittarius pendant" } },
+    { img: "assets/img/gallery/anillo-ancla.webp?v=20261108022318", cat: "anillos", title: { es: "Anillo ancla", en: "Anchor ring" } },
+    { img: "assets/img/gallery/anillo-corona.webp?v=20261108022318", cat: "anillos", title: { es: "Anillo corona con zafiros", en: "Sapphire crown ring" } },
+    { img: "assets/img/gallery/anillo-luna-ballena.webp?v=20261108022318", cat: "organico", title: { es: "Anillo luna y ballena", en: "Moon & whale ring" } },
+    { img: "assets/img/gallery/anillo-cupula-zafiros.webp?v=20261108022318", cat: "anillos", title: { es: "Anillo cúpula de zafiros", en: "Sapphire dome ring" } },
+    { img: "assets/img/gallery/dije-sagitario.webp?v=20261108022318", cat: "religiosa", title: { es: "Dije Sagitario", en: "Sagittarius pendant" } },
   ];
 
   return real;
