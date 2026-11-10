@@ -159,6 +159,8 @@ window.CATEGORIES = {
   organico: { es: "Orgánico", en: "Organic" },
   pulseras: { es: "Pulseras y eslabones", en: "Bracelets & links" },
   religiosa: { es: "Cruces y dijes", en: "Crosses & pendants" },
+  aretes: { es: "Aretes", en: "Earrings" },
+  sets: { es: "Sets", en: "Sets" },
 };
 
 window.GALLERY = (() => {
@@ -170,6 +172,11 @@ window.GALLERY = (() => {
     { img: "assets/img/gallery/anillo-luna-ballena.webp?v=20261108022318", cat: "organico", title: { es: "Golden Crescent Whale Vine Ring", en: "Golden Crescent Whale Vine Ring" } },
     { img: "assets/img/gallery/anillo-cupula-zafiros.webp?v=20261108022318", cat: "anillos", title: { es: "Anillo Domo Zafiros", en: "Sapphire Dome Ring" } },
     { img: "assets/img/gallery/dije-sagitario.webp?v=20261108022318", cat: "religiosa", title: { es: "Sagitario", en: "Sagittarius" } },
+    { img: "assets/img/gallery/aretes-corazon-halo.webp?v=20261110164743", cat: "aretes", title: { es: "Aretes corazón halo", en: "Heart halo earrings" } },
+    { img: "assets/img/gallery/dije-casco-hockey.webp?v=20261110164743", cat: "religiosa", title: { es: "Dije casco de hockey", en: "Hockey helmet pendant" } },
+    { img: "assets/img/gallery/dije-corazon-rubi.webp?v=20261110164743", cat: "religiosa", title: { es: "Dije corazón rubí", en: "Ruby heart pendant" } },
+    { img: "assets/img/gallery/dije-reja.webp?v=20261110164743", cat: "religiosa", title: { es: "Dije reja", en: "Grid pendant" } },
+    { img: "assets/img/gallery/set-piedras-colores.webp?v=20261110164743", cat: "sets", title: { es: "Set piedras de colores", en: "Colored stone set" } },
   ];
 
   return real;
