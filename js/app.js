@@ -12,7 +12,7 @@
   let lang = params.get("lang") || localStorage.getItem("mp-lang") || "es";
   if (!D[lang]) lang = "es";
   const t = (k) => D[lang][k] ?? k;
-  const L = (o) => (o && typeof o === "object" ? o[lang] ?? o.es : o ?? "");
+  const L = (o) => (Array.isArray(o) ? o : o && typeof o === "object" ? o[lang] ?? o.es : o ?? "");
 
   const savedTheme = localStorage.getItem("mp-theme");
   document.documentElement.dataset.theme = savedTheme || "light"; // claro por defecto
@@ -195,7 +195,7 @@
           <div class="feature-meta"><span class="num">${String(i + 1).padStart(2, "0")}</span><span>·</span><span>${L(p.category)}</span>${p.year ? `<span>· ${p.year}</span>` : ""}</div>
           <h3>${L(p.title)}</h3>
           <p>${L(p.summary)}</p>
-          <div class="feature-tags">${p.tags.map((x) => `<span class="tag">${x}</span>`).join("")}</div>
+          <div class="feature-tags">${L(p.tags).map((x) => `<span class="tag">${x}</span>`).join("")}</div>
           <a class="link-arrow" href="project.html?p=${p.slug}">${t("featured.case")} ${I.arrow}</a>
         </div>
         <a class="feature-media" href="project.html?p=${p.slug}" aria-label="${L(p.title)} — ${t("featured.open")}">
@@ -276,37 +276,55 @@
     const root = $("#project");
     if (i < 0) { root.innerHTML = `<section class="p-hero wrap"><a class="back" href="index.html#work">${I.back}<span>${t("project.back")}</span></a><h1 class="p-title">${t("project.notFound")}</h1></section>`; return; }
     const p = P[i], n = P[(i + 1) % P.length];
-    document.title = `${L(p.title)} — ${S.name}`;
+    document.title = `${L(p.pageTitle || p.title)} — ${S.name}`;
+    const modelHTML = () => p.model ? `
+      <section class="wrap p-block">
+        <div class="p-block-head reveal"><div><span class="eyebrow">${t("project.model")}</span><h2>${t("project.modelH")}</h2></div><p>${t("project.modelP")}</p></div>
+        <div class="viewer reveal">
+          <model-viewer id="mv" src="${p.model}" alt="${L(p.pageTitle || p.title)} 3D" camera-controls auto-rotate auto-rotate-delay="1500" rotation-per-second="18deg" interaction-prompt="none" shadow-intensity="0.6" shadow-softness="1" exposure="1.05" environment-image="neutral" touch-action="pan-y" loading="lazy"></model-viewer>
+          ${p.real ? "" : `<div class="finishes">${Object.keys(FINISHES).map((f, k) => `<button class="finish${k === 0 ? " on" : ""}" data-f="${f}" aria-label="${t("finish." + f)}" title="${t("finish." + f)}" style="background:radial-gradient(circle at 30% 30%,#fff,rgb(${FINISHES[f].map((c) => Math.round(c * 255)).join(",")}) 55%,rgb(${FINISHES[f].map((c) => Math.round(c * 160)).join(",")}))"></button>`).join("")}</div>`}
+          <span class="hint">${t("project.hint")}</span>
+        </div>
+      </section>` : "";
+    const sectionHTML = (x) => {
+      if (x.type === "model") return modelHTML();
+      if (x.type === "images") return `
+      <section class="wrap p-block"><div class="p-grid">${x.items.map((it, k) => `<figure class="reveal d${k + 1}"><img src="${it.src}" alt="${L(it.caption)}" loading="lazy"><figcaption class="cap">${L(it.caption)}</figcaption></figure>`).join("")}</div></section>`;
+      const head = x.title ? `<div class="p-block-head reveal"><div><span class="eyebrow">${t("project.result")}</span><h2>${L(x.title)}</h2></div><p></p></div>` : "";
+      return `
+      <section class="wrap p-block">${head}
+        <figure class="p-wide reveal${x.type === "photo" ? " is-photo" : ""}"><img src="${x.src}" alt="${L(x.caption)}" loading="lazy"><figcaption class="cap">${L(x.caption)}</figcaption></figure>
+      </section>`;
+    };
+    // Proyectos de ejemplo (sin "sections"): estructura anterior
+    const legacy = () => `
+      ${p.blocks.map((b) => `
+      <section class="wrap p-block">
+        <div class="p-grid">${b.images.map((src, k) => `<figure class="reveal d${k + 1}"><img src="${src}" alt="${L(b.captions)[k] || ""}" loading="lazy"><figcaption class="cap">${L(b.captions)[k] || ""}</figcaption></figure>`).join("")}</div>
+      </section>`).join("")}
+      ${modelHTML()}
+      <section class="wrap p-block">
+        <div class="p-block-head reveal"><div><span class="eyebrow">${t("project.result")}</span><h2>${t("project.resultH")}</h2></div><p></p></div>
+        <figure class="p-wide reveal"><img src="${p.result.image}" alt="${L(p.result.caption)}" loading="lazy"><figcaption class="cap">${L(p.result.caption)}</figcaption></figure>
+      </section>`;
     root.innerHTML = `
       <section class="p-hero wrap">
         <div class="p-hero-text">
           <a class="back" href="index.html#work">${I.back}<span>${t("project.back")}</span></a>
           <div class="eyebrow reveal">${String(i + 1).padStart(2, "0")} · ${L(p.category)}${p.year ? " · " + p.year : ""}</div>
-          <h1 class="p-title reveal d1">${L(p.title)}</h1>
-          <p class="p-sub reveal d2">${L(p.summary)}</p>
+          <h1 class="p-title reveal d1">${L(p.pageTitle || p.title)}</h1>
+          <p class="p-sub reveal d2">${L(p.tagline || p.summary)}</p>
         </div>
-        <div class="p-cover reveal d2"><img src="${p.cover}" alt="${L(p.title)}"></div>
+        <div class="p-cover reveal d2${p.real ? " is-real" : ""}"><img src="${p.cover}" alt="${L(p.pageTitle || p.title)}"></div>
       </section>
       <section class="wrap p-overview">
         <div class="reveal">${L(p.overview).map((x) => `<p>${x}</p>`).join("")}</div>
+        ${p.credits || p.real ? `<dl class="p-meta reveal">
+          ${(p.credits || []).map((c) => `<div><dt>${L(c.label)}</dt><dd>${L(c.value)}</dd></div>`).join("")}
+          ${p.real ? `<div><dt>${t("project.focus")}</dt><dd>${L(p.tags).join(" · ")}</dd></div>` : ""}
+        </dl>` : ""}
       </section>
-      ${p.blocks.map((b) => `
-      <section class="wrap p-block">
-        <div class="p-grid">${b.images.map((src, k) => `<figure class="reveal d${k + 1}"><img src="${src}" alt="${L(b.captions)[k] || ""}" loading="lazy"><figcaption class="cap">${L(b.captions)[k] || ""}</figcaption></figure>`).join("")}</div>
-      </section>`).join("")}
-      ${p.model ? `
-      <section class="wrap p-block">
-        <div class="p-block-head reveal"><div><span class="eyebrow">${t("project.model")}</span><h2>${t("project.modelH")}</h2></div><p>${t("project.modelP")}</p></div>
-        <div class="viewer reveal">
-          <model-viewer id="mv" src="${p.model}" alt="${L(p.title)} 3D" camera-controls auto-rotate auto-rotate-delay="1500" rotation-per-second="18deg" interaction-prompt="none" shadow-intensity="0.6" shadow-softness="1" exposure="1.05" environment-image="neutral" touch-action="pan-y" loading="lazy"></model-viewer>
-          <div class="finishes">${Object.keys(FINISHES).map((f, k) => `<button class="finish${k === 0 ? " on" : ""}" data-f="${f}" aria-label="${t("finish." + f)}" title="${t("finish." + f)}" style="background:radial-gradient(circle at 30% 30%,#fff,rgb(${FINISHES[f].map((c) => Math.round(c * 255)).join(",")}) 55%,rgb(${FINISHES[f].map((c) => Math.round(c * 160)).join(",")}))"></button>`).join("")}</div>
-          <span class="hint">${t("project.hint")}</span>
-        </div>
-      </section>` : ""}
-      <section class="wrap p-block">
-        <div class="p-block-head reveal"><div><span class="eyebrow">${t("project.result")}</span><h2>${t("project.resultH")}</h2></div><p></p></div>
-        <figure class="p-wide reveal"><img src="${p.result.image}" alt="${L(p.result.caption)}" loading="lazy"><figcaption class="cap">${L(p.result.caption)}</figcaption></figure>
-      </section>
+      ${p.sections ? p.sections.map(sectionHTML).join("") : legacy()}
       <section class="wrap p-next">
         <div class="reveal"><span class="eyebrow">${t("project.next")}</span><h3>${L(n.title)}</h3><a class="link-arrow" href="project.html?p=${n.slug}">${t("featured.case")} ${I.arrow}</a></div>
         <a class="feature-media reveal d1" href="project.html?p=${n.slug}"><img class="main" src="${n.cover}" alt="${L(n.title)}" loading="lazy"><span class="open">${t("featured.open")} ${I.arrow}</span></a>
@@ -320,7 +338,7 @@
       mv.model.materials.forEach((m) => { if (m.name.startsWith("metal")) { m.pbrMetallicRoughness.setBaseColorFactor([...FINISHES[f], 1]); } });
     };
     $$(".finish").forEach((b) => b.addEventListener("click", () => { $$(".finish").forEach((x) => x.classList.toggle("on", x === b)); apply(b.dataset.f); }));
-    mv.addEventListener("load", () => apply($(".finish.on").dataset.f));
+    mv.addEventListener("load", () => { const on = $(".finish.on"); if (on) apply(on.dataset.f); });
   }
 
   /* ---------- Arranque ---------- */

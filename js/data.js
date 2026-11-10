@@ -73,29 +73,38 @@ window.PROJECTS = [
     result: { image: "assets/img/projects/escultorica-cover.webp", caption: { es: "Pieza de la colección", en: "Piece from the collection" } },
   },
   {
-    slug: "halo",
-    title: { es: "Constelación", en: "Constellation" },
-    category: { es: "Anillo · Engaste pavé", en: "Ring · Pavé setting" },
+    // Proyecto real (textos de la guía de implementación)
+    slug: "onyx-ring",
+    real: true,
+    title: { es: "Onyx Ring — Carré Setting", en: "Onyx Ring — Carré Setting" },
+    pageTitle: { es: "Anillo de Ónix", en: "Onyx Ring" },
+    tagline: { es: "Engaste Carré y precisión geométrica", en: "Carré Setting & Geometric Precision" },
+    category: { es: "Anillo · Engaste Carré", en: "Ring · Carré setting" },
     year: "",
     summary: {
-      es: "Un anillo con decenas de piedras en engaste pavé, calculado para que cada una quede bien sujeta y a la misma altura.",
-      en: "A ring with dozens of pavé-set stones, calculated so each one sits securely at the same height.",
+      es: "Modelado 3D de joyería de precisión, con énfasis en engastes, proporciones y detalles geométricos.",
+      en: "Precision 3D jewelry modeling with an emphasis on stone setting, proportions, and geometric detailing.",
     },
-    tags: ["Grasshopper Gold", "Peacock", "Rhinoceros"],
-    cover: "assets/img/projects/halo-cover.webp",
-    hover: "assets/img/projects/halo-c.webp",
-    model: "assets/models/halo.glb",
-    overview: {
-      es: ["Los anillos con muchos engastes exigen precisión: distribución de piedras, grosor de metal, uñas y asientos.",
-           "Con Grasshopper Gold, la distribución es paramétrica: si cambia la talla o el tamaño de piedra, el anillo se ajusta sin rehacer el modelo."],
-      en: ["Rings with many settings demand precision: stone layout, metal thickness, prongs and seats.",
-           "With Grasshopper Gold the layout is parametric: if the ring size or stone size changes, the model adapts without being rebuilt."],
-    },
-    blocks: [
-      { images: ["assets/img/projects/halo-a.webp", "assets/img/projects/halo-b.webp"],
-        captions: { es: ["Vista lateral", "Detalle del pavé"], en: ["Side view", "Pavé detail"] } },
+    tags: { es: ["Modelado de precisión", "Engastes", "Desarrollo geométrico"], en: ["Precision Modeling", "Stone Settings", "Geometric Development"] },
+    credits: [
+      { label: { es: "Mi participación", en: "Role" }, value: { es: "Modelado 3D de joyería y desarrollo técnico", en: "3D Jewelry Modeling & Technical Development" } },
     ],
-    result: { image: "assets/img/projects/halo-cover.webp", caption: { es: "Render final", en: "Final render" } },
+    cover: "assets/img/projects/onyx-render-1.webp",
+    hover: "assets/img/projects/onyx-render-2.webp",
+    model: "assets/models/onyx-ring.glb",
+    overview: {
+      es: ["Este proyecto destaca el desarrollo técnico de un anillo con piedras, haciendo énfasis en el control geométrico, la ubicación de las gemas y la construcción detallada de los engastes.",
+           "El proceso de modelado 3D incluyó el ajuste de proporciones y la integración de los engastes en la estructura general, buscando un diseño coherente. El proyecto demuestra la importancia de la precisión en el desarrollo digital de joyería, donde incluso los pequeños detalles geométricos influyen en el resultado final."],
+      en: ["This project highlights the technical development of a gemstone ring, with a focus on controlled geometry, stone placement, and detailed setting construction.",
+           "The 3D modeling process involved refining proportions and integrating the setting into the overall structure to achieve a cohesive design. The project demonstrates the importance of precision in digital jewelry development, where even small geometric details influence the final result."],
+    },
+    // Secuencia visual de la página (en este orden)
+    sections: [
+      { type: "image", src: "assets/img/projects/onyx-render-2.webp", caption: { es: "Vista general del anillo", en: "Overall view of the ring" } },
+      { type: "model" },
+      { type: "image", src: "assets/img/projects/onyx-render-3.webp", caption: { es: "Detalle de la estructura de los engastes", en: "Detail of the setting structure" } },
+      { type: "photo", src: "assets/img/projects/onyx-foto.webp", title: { es: "La pieza fabricada", en: "The finished piece" }, caption: { es: "Anillo de Ónix fabricado", en: "Finished Onyx Ring" } },
+    ],
   },
   {
     slug: "ceramica",
