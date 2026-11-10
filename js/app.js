@@ -332,7 +332,7 @@
      después de unos segundos sin tocarlo vuelve suavemente a esa inclinación y distancia. */
   function heroOrbit() {
     const mv = $(".hero-object"); if (!mv) return;
-    const PHI = "47deg", RADIUS = "105%";
+    const PHI = "47deg", RADIUS = "112%";
     let timer;
     mv.addEventListener("camera-change", (e) => {
       if (e.detail.source !== "user-interaction") return;
