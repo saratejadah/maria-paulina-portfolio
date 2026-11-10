@@ -328,10 +328,26 @@
     if (page === "home") renderHome();
     if (page === "project") renderProject();
   }
+  /* Anillo del inicio: gira siempre en la misma perspectiva. Si la persona lo mueve,
+     después de unos segundos sin tocarlo vuelve suavemente a esa inclinación y distancia. */
+  function heroOrbit() {
+    const mv = $(".hero-object"); if (!mv) return;
+    const PHI = "47deg", RADIUS = "105%";
+    let timer;
+    mv.addEventListener("camera-change", (e) => {
+      if (e.detail.source !== "user-interaction") return;
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        const { theta } = mv.getCameraOrbit();
+        mv.cameraOrbit = `${theta}rad ${PHI} ${RADIUS}`;
+      }, 1800);
+    });
+  }
+
   renderChrome();
   renderPage();
   applyI18n();
   initLB();
   observeReveals();
-  if (page === "home") horizontalWork();
+  if (page === "home") { horizontalWork(); heroOrbit(); }
 })();
