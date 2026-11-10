@@ -172,11 +172,11 @@ window.GALLERY = (() => {
     { img: "assets/img/gallery/anillo-luna-ballena.webp?v=20261108022318", cat: "organico", title: { es: "Golden Crescent Whale Vine Ring", en: "Golden Crescent Whale Vine Ring" } },
     { img: "assets/img/gallery/anillo-cupula-zafiros.webp?v=20261108022318", cat: "anillos", title: { es: "Anillo Domo Zafiros", en: "Sapphire Dome Ring" } },
     { img: "assets/img/gallery/dije-sagitario.webp?v=20261108022318", cat: "religiosa", title: { es: "Sagitario", en: "Sagittarius" } },
-    { img: "assets/img/gallery/aretes-corazon-halo.webp?v=20261110164743", cat: "aretes", title: { es: "Aretes corazón halo", en: "Heart halo earrings" } },
-    { img: "assets/img/gallery/dije-casco-hockey.webp?v=20261110164743", cat: "religiosa", title: { es: "Dije casco de hockey", en: "Hockey helmet pendant" } },
-    { img: "assets/img/gallery/dije-corazon-rubi.webp?v=20261110164743", cat: "religiosa", title: { es: "Dije corazón rubí", en: "Ruby heart pendant" } },
-    { img: "assets/img/gallery/dije-reja.webp?v=20261110164743", cat: "religiosa", title: { es: "Dije reja", en: "Grid pendant" } },
-    { img: "assets/img/gallery/set-piedras-colores.webp?v=20261110164743", cat: "sets", title: { es: "Set piedras de colores", en: "Colored stone set" } },
+    { img: "assets/img/gallery/aretes-corazon-halo.webp?v=20261110164743", cat: "aretes", title: { es: "Aretes Topos y Jackets Corazón", en: "Heart Studs & Jackets Earrings" } },
+    { img: "assets/img/gallery/dije-casco-hockey.webp?v=20261110164743", cat: "religiosa", title: { es: "Dije Casco", en: "Helmet Pendant" } },
+    { img: "assets/img/gallery/dije-corazon-rubi.webp?v=20261110164743", cat: "religiosa", title: { es: "Dije Corazón", en: "Heart Pendant" } },
+    { img: "assets/img/gallery/dije-reja.webp?v=20261110164743", cat: "religiosa", title: { es: "Dije Malla", en: "Mesh Pendant" } },
+    { img: "assets/img/gallery/set-piedras-colores.webp?v=20261110164743", cat: "sets", title: { es: "Polished Gold Emerald Jewelry Set", en: "Polished Gold Emerald Jewelry Set" } },
   ];
 
   return real;
