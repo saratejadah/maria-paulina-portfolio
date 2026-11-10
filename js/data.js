@@ -158,7 +158,7 @@ window.CATEGORIES = {
   anillos: { es: "Anillos y engastes", en: "Rings & settings" },
   organico: { es: "Orgánico", en: "Organic" },
   pulseras: { es: "Pulseras y eslabones", en: "Bracelets & links" },
-  religiosa: { es: "Cruces y dijes", en: "Crosses & pendants" },
+  religiosa: { es: "Dijes", en: "Pendants" },
   aretes: { es: "Aretes", en: "Earrings" },
   sets: { es: "Sets", en: "Sets" },
 };
