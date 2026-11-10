@@ -15,7 +15,7 @@ window.SITE = {
   linkedin: "https://linkedin.com/in/maria-paulina-villegas",
   cv: { es: "assets/cv/CV-Maria-Paulina-Villegas-ES.pdf", en: "assets/cv/CV-Maria-Paulina-Villegas-EN.pdf" },
   // Foto de ella para "Sobre mí" (dejar vacío "" para mostrar las iniciales)
-  portrait: "",
+  portrait: "assets/img/maria-paulina.webp?v=202611100412",
 };
 
 /* --------------------------------------------------------------------------

@@ -328,7 +328,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 /* ---------- Sobre mí ---------- */
 .about-grid { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
 .portrait { position: sticky; top: 120px; aspect-ratio: 4 / 5; max-height: calc(100svh - 150px); min-height: 240px; border-radius: var(--radius); overflow: hidden; background: var(--card-bg); border: 1px solid var(--glass-border); box-shadow: var(--shadow); display: grid; place-items: center; }
-.portrait img { width: 100%; height: 100%; object-fit: cover; }
+.portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; }
 .portrait .initials { font-family: var(--serif); font-style: italic; font-size: 140px; color: var(--muted); opacity: .5; }
 .portrait .note { position: absolute; bottom: 16px; left: 16px; right: 16px; font-size: 12px; color: var(--muted); text-align: center; }
 .about h3 { margin: 0 0 28px; font-family: var(--serif); font-weight: 400; font-size: clamp(38px, 4.4vw, 60px); line-height: 1.02; letter-spacing: -0.015em; }
