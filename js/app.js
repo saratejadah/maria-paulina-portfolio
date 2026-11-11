@@ -198,7 +198,7 @@
           <div class="feature-tags">${L(p.tags).map((x) => `<span class="tag">${x}</span>`).join("")}</div>
           <a class="link-arrow" href="project.html?p=${p.slug}">${t("featured.case")} ${I.arrow}</a>
         </div>
-        <a class="feature-media" href="project.html?p=${p.slug}" aria-label="${L(p.title)} — ${t("featured.open")}">
+        <a class="feature-media${p.coverPhoto ? " is-photo" : ""}" href="project.html?p=${p.slug}" aria-label="${L(p.title)} — ${t("featured.open")}">
           <img class="main" src="${p.cover}" alt="${L(p.title)}" decoding="async">
           ${p.hover ? `<img class="alt" src="${p.hover}" alt="" loading="lazy" decoding="async">` : ""}
           <span class="open">${t("featured.open")} ${I.arrow}</span>
@@ -277,36 +277,32 @@
     if (i < 0) { root.innerHTML = `<section class="p-hero wrap"><a class="back" href="index.html#work">${I.back}<span>${t("project.back")}</span></a><h1 class="p-title">${t("project.notFound")}</h1></section>`; return; }
     const p = P[i], n = P[(i + 1) % P.length];
     document.title = `${L(p.pageTitle || p.title)} — ${S.name}`;
-    const modelHTML = () => p.model ? `
+    const cap = (c) => (c ? `<figcaption class="cap">${L(c)}</figcaption>` : "");
+    const media = (it) => it.video
+      ? `<video class="p-video" autoplay muted loop playsinline preload="none" poster="${it.video}-poster.webp" aria-label="${L(it.caption)}"><source src="${it.video}.webm" type="video/webm"><source src="${it.video}.mp4" type="video/mp4"></video>`
+      : `<img src="${it.src}" alt="${L(it.caption)}" loading="lazy">`;
+    const modelHTML = (src, name) => `
       <section class="wrap p-block">
-        <div class="p-block-head reveal"><div><span class="eyebrow">${t("project.model")}</span><h2>${t("project.modelH")}</h2></div><p>${t("project.modelP")}</p></div>
+        <div class="p-block-head reveal"><div><span class="eyebrow">${t("project.model")}${name ? " · " + name : ""}</span><h2>${t("project.modelH")}</h2></div><p>${t("project.modelP")}</p></div>
         <div class="viewer reveal">
-          <model-viewer id="mv" src="${p.model}" alt="${L(p.pageTitle || p.title)} 3D" camera-controls auto-rotate auto-rotate-delay="1500" rotation-per-second="18deg" interaction-prompt="none" shadow-intensity="0.6" shadow-softness="1" exposure="1.05" environment-image="neutral" touch-action="pan-y" loading="lazy"></model-viewer>
-          ${p.real ? "" : `<div class="finishes">${Object.keys(FINISHES).map((f, k) => `<button class="finish${k === 0 ? " on" : ""}" data-f="${f}" aria-label="${t("finish." + f)}" title="${t("finish." + f)}" style="background:radial-gradient(circle at 30% 30%,#fff,rgb(${FINISHES[f].map((c) => Math.round(c * 255)).join(",")}) 55%,rgb(${FINISHES[f].map((c) => Math.round(c * 160)).join(",")}))"></button>`).join("")}</div>`}
+          <model-viewer src="${src}" alt="${name || L(p.pageTitle || p.title)} — 3D" camera-controls auto-rotate auto-rotate-delay="1500" rotation-per-second="18deg" interaction-prompt="none" shadow-intensity="0.6" shadow-softness="1" exposure="1.05" environment-image="neutral" touch-action="pan-y" loading="lazy"></model-viewer>
           <span class="hint">${t("project.hint")}</span>
         </div>
-      </section>` : "";
+      </section>`;
     const sectionHTML = (x) => {
-      if (x.type === "model") return modelHTML();
-      if (x.type === "images") return `
-      <section class="wrap p-block"><div class="p-grid">${x.items.map((it, k) => `<figure class="reveal d${k + 1}"><img src="${it.src}" alt="${L(it.caption)}" loading="lazy"><figcaption class="cap">${L(it.caption)}</figcaption></figure>`).join("")}</div></section>`;
+      if (x.type === "model") return modelHTML(x.src, x.name);
+      if (x.type === "text") return `
+      <section class="wrap p-block p-text reveal">
+        ${x.eyebrow ? `<span class="eyebrow">${x.eyebrow}</span>` : ""}<h2>${L(x.title)}</h2><p>${L(x.text)}</p>
+      </section>`;
+      if (x.type === "grid") return `
+      <section class="wrap p-block"><div class="p-grid">${x.items.map((it, k) => `<figure class="reveal d${k + 1}${it.photo ? " is-photo" : ""}${it.video ? " is-video" : ""}">${media(it)}${cap(it.caption)}</figure>`).join("")}</div></section>`;
       const head = x.title ? `<div class="p-block-head reveal"><div><span class="eyebrow">${t("project.result")}</span><h2>${L(x.title)}</h2></div><p></p></div>` : "";
       return `
       <section class="wrap p-block">${head}
-        <figure class="p-wide reveal${x.type === "photo" ? " is-photo" : ""}"><img src="${x.src}" alt="${L(x.caption)}" loading="lazy"><figcaption class="cap">${L(x.caption)}</figcaption></figure>
+        <figure class="p-wide reveal${x.type === "photo" ? " is-photo" : ""}${x.wide ? " is-wide" : ""}">${media(x)}${cap(x.caption)}</figure>
       </section>`;
     };
-    // Proyectos de ejemplo (sin "sections"): estructura anterior
-    const legacy = () => `
-      ${p.blocks.map((b) => `
-      <section class="wrap p-block">
-        <div class="p-grid">${b.images.map((src, k) => `<figure class="reveal d${k + 1}"><img src="${src}" alt="${L(b.captions)[k] || ""}" loading="lazy"><figcaption class="cap">${L(b.captions)[k] || ""}</figcaption></figure>`).join("")}</div>
-      </section>`).join("")}
-      ${modelHTML()}
-      <section class="wrap p-block">
-        <div class="p-block-head reveal"><div><span class="eyebrow">${t("project.result")}</span><h2>${t("project.resultH")}</h2></div><p></p></div>
-        <figure class="p-wide reveal"><img src="${p.result.image}" alt="${L(p.result.caption)}" loading="lazy"><figcaption class="cap">${L(p.result.caption)}</figcaption></figure>
-      </section>`;
     root.innerHTML = `
       <section class="p-hero wrap">
         <div class="p-hero-text">
@@ -315,21 +311,29 @@
           <h1 class="p-title reveal d1">${L(p.pageTitle || p.title)}</h1>
           <p class="p-sub reveal d2">${L(p.tagline || p.summary)}</p>
         </div>
-        <div class="p-cover reveal d2${p.real ? " is-real" : ""}"><img src="${p.cover}" alt="${L(p.pageTitle || p.title)}"></div>
+        <div class="p-cover reveal d2 is-real${p.coverPhoto ? " is-photo" : ""}"><img src="${p.cover}" alt="${L(p.pageTitle || p.title)}"></div>
       </section>
       <section class="wrap p-overview">
         <div class="reveal">${L(p.overview).map((x) => `<p>${x}</p>`).join("")}</div>
-        ${p.credits || p.real ? `<dl class="p-meta reveal">
+        ${`<dl class="p-meta reveal">
           ${(p.credits || []).map((c) => `<div><dt>${L(c.label)}</dt><dd>${L(c.value)}</dd></div>`).join("")}
-          ${p.real ? `<div><dt>${t("project.focus")}</dt><dd>${L(p.tags).join(" · ")}</dd></div>` : ""}
-        </dl>` : ""}
+          <div><dt>${t("project.focus")}</dt><dd>${L(p.tags).join(" · ")}</dd></div>
+        </dl>`}
       </section>
-      ${p.sections ? p.sections.map(sectionHTML).join("") : legacy()}
+      ${p.sections.map(sectionHTML).join("")}
       <section class="wrap p-next">
         <div class="reveal"><span class="eyebrow">${t("project.next")}</span><h3>${L(n.title)}</h3><a class="link-arrow" href="project.html?p=${n.slug}">${t("featured.case")} ${I.arrow}</a></div>
-        <a class="feature-media reveal d1" href="project.html?p=${n.slug}"><img class="main" src="${n.cover}" alt="${L(n.title)}" loading="lazy"><span class="open">${t("featured.open")} ${I.arrow}</span></a>
+        <a class="feature-media reveal d1${n.coverPhoto ? " is-photo" : ""}" href="project.html?p=${n.slug}"><img class="main" src="${n.cover}" alt="${L(n.title)}" loading="lazy"><span class="open">${t("featured.open")} ${I.arrow}</span></a>
       </section>`;
-    initFinishes();
+    initVideos();
+  }
+  function initVideos() {
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    $$(".p-video").forEach((v) => {
+      if (reduce) { v.autoplay = false; v.pause(); v.controls = true; return; }
+      // cargar y reproducir solo cuando el video está en pantalla
+      new IntersectionObserver(([e]) => { if (e.isIntersecting) { v.preload = "auto"; v.play().catch(() => {}); } else v.pause(); }, { threshold: 0.2 }).observe(v);
+    });
   }
   function initFinishes() {
     const mv = $("#mv"); if (!mv) return;
