@@ -382,7 +382,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 .p-block-head p { margin: 0; font-size: 18px; color: var(--text-2); align-self: end; }
 .p-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 820px; }
 .p-grid figure, .p-wide { margin: 0; border-radius: var(--radius); overflow: hidden; background: var(--card-bg); border: 1px solid var(--glass-border); }
-.p-grid img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
+.p-grid img { width: 100%; aspect-ratio: 1 / 1; object-fit: contain; padding: 6%; }
 .p-wide { max-width: 820px; }
 .p-wide img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
 figcaption.cap { padding: 12px 16px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); }
@@ -519,7 +519,7 @@ figcaption.cap { padding: 12px 16px; font-size: 13px; color: var(--muted); borde
 .p-cover.is-photo img { object-fit: cover; width: 100%; height: 100%; filter: none; }
 .feature-media.is-photo img { object-fit: cover; padding: 0; }
 .p-grid figure.is-photo img, .p-grid figure.is-video video { width: 100%; aspect-ratio: 1 / 1; display: block; }
-.p-grid figure.is-photo img { object-fit: contain; background: #ebe8e3; }
+.p-grid figure.is-photo img { object-fit: contain; padding: 0; background: #ebe8e3; }
 .p-grid figure.is-video video { object-fit: cover; background: #6a6a6a; }
 .p-wide video { width: 100%; display: block; }
 .p-wide.is-wide { max-width: none; }

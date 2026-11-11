@@ -103,6 +103,38 @@ window.PROJECTS = [
     ],
   },
   {
+    slug: "sapphire-cross",
+    real: true,
+    title: { es: "Cruz con Zafiros", en: "Sapphire Cross" },
+    tagline: { es: "De la referencia a la realidad", en: "From Reference to Reality" },
+    category: { es: "Dije · Engaste de zafiros", en: "Pendant · Sapphire setting" },
+    year: "",
+    summary: {
+      es: "De la referencia del cliente a un modelo 3D detallado, conectando la interpretación del diseño con su fabricación.",
+      en: "From a client's reference to a detailed 3D jewelry model, bridging design interpretation and manufacturing.",
+    },
+    tags: { es: ["Interpretación de referencias", "Modelado 3D de joyería", "Desarrollo técnico"], en: ["Reference Interpretation", "3D Jewelry Modeling", "Technical Development"] },
+    credits: [
+      { label: { es: "Mi participación", en: "Role" }, value: { es: "Modelado 3D de joyería y desarrollo técnico", en: "3D Jewelry Modeling & Technical Development" } },
+    ],
+    cover: "assets/img/projects/cross-render-1.webp",
+    hover: "assets/img/projects/cross-render-2.webp",
+    overview: {
+      es: ["Este proyecto consistió en transformar una referencia inicial proporcionada por el cliente en un modelo tridimensional detallado de joyería. El proceso de desarrollo se centró en interpretar el concepto original, definir las proporciones y construir la geometría necesaria para la pieza.",
+           "La evolución desde la referencia inicial hasta el modelo digital y el trabajo de fabricación demuestra la relación entre el modelado técnico y la producción de joyería."],
+      en: ["This project involved translating a client's initial design reference into a detailed three-dimensional jewelry model. The development process focused on interpreting the original concept, defining proportions, and constructing the geometry required for the piece.",
+           "The progression from initial reference to digital model and workshop production illustrates the relationship between technical modeling and jewelry manufacturing."],
+    },
+    sections: [
+      { type: "grid", items: [
+        { src: "assets/img/projects/cross-boceto.webp", photo: true, caption: { es: "Referencia inicial del cliente: boceto y zafiros", en: "Client's initial reference: sketch and sapphires" } },
+        { src: "assets/img/projects/cross-render-2.webp", caption: { es: "Modelo digital: volumen y engastes", en: "Digital model: volume and settings" } },
+      ] },
+      { type: "model", src: "assets/models/sapphire-cross.glb" },
+      { type: "photo", src: "assets/img/projects/cross-taller.webp", title: { es: "En el taller", en: "In the workshop" }, caption: { es: "Proceso de fabricación en taller", en: "Workshop manufacturing process" } },
+    ],
+  },
+  {
     slug: "interbeing-bangle",
     real: true,
     coverPhoto: true,
