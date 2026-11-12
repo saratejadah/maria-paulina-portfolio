@@ -65,11 +65,13 @@ window.PROJECTS = [
         { video: "assets/video/serpi-360", caption: { es: "Eslabones de Serpi en 360°", en: "Serpi links in 360°" } },
       ] },
       { type: "model", src: "assets/models/serpi.glb", name: "Serpi" },
-      { type: "photo", src: "assets/img/projects/serpi-cadenas.webp", caption: { es: "Cadenas Serpi en plata y oro", en: "Serpi chains in silver and gold" } },
       { type: "text", title: { es: "Del modelo digital a la joya terminada", en: "From Digital Model to Finished Jewelry" },
         text: { es: "Las piezas finales muestran cómo los conceptos escultóricos pueden transformarse en joyas tangibles mediante el modelado digital y los procesos de fabricación.",
                 en: "The final pieces demonstrate how sculptural concepts can be transformed into tangible jewelry through digital modeling and manufacturing processes." } },
-      { type: "photo", src: "assets/img/projects/serpi-cadenas-detalle.webp", caption: { es: "Detalle de los eslabones Serpi", en: "Detail of the Serpi links" } },
+      { type: "grid", fill: true, items: [
+        { src: "assets/img/projects/serpi-cadenas.webp", photo: true, caption: { es: "Cadenas Serpi en plata y oro", en: "Serpi chains in silver and gold" } },
+        { src: "assets/img/projects/serpi-cadenas-detalle.webp", photo: true, caption: { es: "Detalle de los eslabones Serpi", en: "Detail of the Serpi links" } },
+      ] },
     ],
   },
   {

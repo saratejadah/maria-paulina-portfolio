@@ -300,7 +300,7 @@
         ${x.eyebrow ? `<span class="eyebrow">${x.eyebrow}</span>` : ""}<h2>${L(x.title)}</h2><p>${L(x.text)}</p>
       </section>`;
       if (x.type === "grid") return `
-      <section class="wrap p-block"><div class="p-grid">${x.items.map((it, k) => `<figure class="reveal d${k + 1}${it.photo ? " is-photo" : ""}${it.video ? " is-video" : ""}">${media(it)}${cap(it.caption)}</figure>`).join("")}</div></section>`;
+      <section class="wrap p-block"><div class="p-grid${x.fill ? " is-fill" : ""}">${x.items.map((it, k) => `<figure class="reveal d${k + 1}${it.photo ? " is-photo" : ""}${it.video ? " is-video" : ""}">${media(it)}${cap(it.caption)}</figure>`).join("")}</div></section>`;
       const head = x.title ? `<div class="p-block-head reveal"><div><span class="eyebrow">${t("project.result")}</span><h2>${L(x.title)}</h2></div><p></p></div>` : "";
       return `
       <section class="wrap p-block">${head}
@@ -314,6 +314,7 @@
           <div class="eyebrow reveal">${String(i + 1).padStart(2, "0")} · ${L(p.category)}${p.year ? " · " + p.year : ""}</div>
           <h1 class="p-title reveal d1">${L(p.pageTitle || p.title)}</h1>
           <p class="p-sub reveal d2">${L(p.tagline || p.summary)}</p>
+          <div class="p-tags reveal d2">${L(p.tags).map((x) => `<span class="tag">${x}</span>`).join("")}</div>
         </div>
         <div class="p-cover reveal d2 is-real${p.coverPhoto ? " is-photo" : ""}"><img src="${p.cover}" alt="${L(p.pageTitle || p.title)}"></div>
       </section>
@@ -321,7 +322,6 @@
         <div class="reveal">${L(p.overview).map((x) => `<p>${x}</p>`).join("")}</div>
         ${`<dl class="p-meta reveal">
           ${(p.credits || []).map((c) => `<div><dt>${L(c.label)}</dt><dd>${L(c.value)}</dd></div>`).join("")}
-          <div><dt>${t("project.focus")}</dt><dd>${L(p.tags).join(" · ")}</dd></div>
         </dl>`}
       </section>
       ${p.sections.map(sectionHTML).join("")}
