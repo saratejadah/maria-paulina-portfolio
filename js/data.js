@@ -90,7 +90,7 @@ window.PROJECTS = [
     credits: [
       { label: { es: "Mi participación", en: "Role" }, value: { es: "Modelado 3D de joyería y desarrollo técnico", en: "3D Jewelry Modeling & Technical Development" } },
     ],
-    cover: "assets/img/projects/bracelet-render-completo.webp",
+    cover: "assets/img/projects/bracelet-render-completo.webp?v=20261112143153",
     hover: "assets/img/projects/bracelet-muneca.webp",
     overview: {
       es: ["Este proyecto se centra en el desarrollo técnico 3D de una pulsera de esmeraldas, combinando repetición geométrica, distribución de piedras y consideraciones estructurales. El proceso de modelado requirió especial atención a las proporciones, la alineación y la relación entre los diferentes componentes.",
