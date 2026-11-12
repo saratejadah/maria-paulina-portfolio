@@ -358,6 +358,11 @@
         const c = metals()[0]?.pbrMetallicRoughness.baseColorFactor;
         if (c) { const rgb = c.slice(0, 3).map((v) => Math.round(v * 255)), dark = c.slice(0, 3).map((v) => Math.round(v * 160));
           box.querySelector(".finish-orig").style.background = `radial-gradient(circle at 30% 30%,#fff,rgb(${rgb}) 55%,rgb(${dark}))`; }
+        // si el metal original es igual a uno de los acabados, no repetir: ocultar "original" y marcar ese acabado
+        const same = c && Object.keys(FINISHES).find((f) => FINISHES[f].every((v, i) => Math.abs(v - c[i]) < 0.04));
+        const origBtn = box.querySelector(".finish-orig");
+        origBtn.hidden = !!same;
+        if (same) { btns.forEach((x) => x.classList.toggle("on", x.dataset.f === same)); return; }
         const on = box.querySelector(".finish.on"); if (on && on.dataset.f !== "orig") apply(on.dataset.f);
       });
     });
