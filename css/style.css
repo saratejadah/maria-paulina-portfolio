@@ -548,3 +548,4 @@ figcaption.cap { padding: 12px 16px; font-size: 13px; color: var(--muted); borde
 .p-hero .p-cover.is-real { margin-bottom: -40px; }
 .p-overview { padding-top: 56px; }
 @media (max-width: 980px) { .p-hero { align-items: start; } .p-hero .p-cover.is-real { margin-bottom: 0; } .p-overview { padding-top: 40px; } }
+@media (min-width: 981px) { .p-hero .p-cover.is-real img { top: var(--shift, 0px); } }

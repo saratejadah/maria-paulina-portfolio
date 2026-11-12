@@ -146,6 +146,7 @@ window.PROJECTS = [
   {
     slug: "sapphire-cross",
     real: true,
+    coverShift: 70, // px que baja la pieza del encabezado
     title: { es: "Cruz con Zafiros", en: "Sapphire Cross" },
     tagline: { es: "De la referencia a la realidad", en: "From Reference to Reality" },
     category: { es: "Dije · Engaste de zafiros", en: "Pendant · Sapphire setting" },
@@ -172,7 +173,7 @@ window.PROJECTS = [
         { src: "assets/img/projects/cross-render-2.webp", caption: { es: "Modelo digital: volumen y engastes", en: "Digital model: volume and settings" } },
       ] },
       { type: "model", src: "assets/models/sapphire-cross.glb" },
-      { type: "photo", src: "assets/img/projects/cross-taller.webp", title: { es: "En el taller", en: "In the workshop" }, caption: { es: "Proceso de fabricación en taller", en: "Workshop manufacturing process" } },
+      { type: "photo", narrow: true, src: "assets/img/projects/cross-taller.webp", title: { es: "En el taller", en: "In the workshop" }, caption: { es: "Proceso de fabricación en taller", en: "Workshop manufacturing process" } },
     ],
   },
   {

@@ -316,7 +316,7 @@
           <p class="p-sub reveal d2">${L(p.tagline || p.summary)}</p>
           <div class="p-tags reveal d2">${L(p.tags).map((x) => `<span class="tag">${x}</span>`).join("")}</div>
         </div>
-        <div class="p-cover reveal d2 is-real${p.coverPhoto ? " is-photo" : ""}"><img src="${p.cover}" alt="${L(p.pageTitle || p.title)}"></div>
+        <div class="p-cover reveal d2 is-real${p.coverPhoto ? " is-photo" : ""}"${p.coverShift ? ` style="--shift:${p.coverShift}px"` : ""}><img src="${p.cover}" alt="${L(p.pageTitle || p.title)}"></div>
       </section>
       <section class="wrap p-overview">
         <div class="reveal">${L(p.overview).map((x) => `<p>${x}</p>`).join("")}</div>
