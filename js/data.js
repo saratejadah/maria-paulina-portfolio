@@ -70,6 +70,38 @@ window.PROJECTS = [
     ],
   },
   {
+    slug: "emerald-bracelet",
+    real: true,
+    coverPhoto: true,
+    title: { es: "Pulsera de Esmeraldas", en: "Emerald Bracelet" },
+    tagline: { es: "Precisión en cada detalle", en: "Precision in Every Detail" },
+    category: { es: "Pulsera · Engaste y cierre", en: "Bracelet · Setting & clasp" },
+    year: "",
+    summary: {
+      es: "Modelado técnico 3D de una pulsera con piedras preciosas, enfocado en la distribución de piedras, los detalles estructurales y el desarrollo del cierre.",
+      en: "Technical 3D modeling of a gemstone bracelet, focusing on stone arrangement, structural details, and clasp development.",
+    },
+    tags: { es: ["Modelado técnico 3D", "Distribución de piedras", "Construcción de pulseras", "Detalles del cierre"], en: ["Technical 3D Modeling", "Stone Arrangement", "Bracelet Construction", "Clasp Details"] },
+    credits: [
+      { label: { es: "Mi participación", en: "Role" }, value: { es: "Modelado 3D de joyería y desarrollo técnico", en: "3D Jewelry Modeling & Technical Development" } },
+    ],
+    cover: "assets/img/projects/bracelet-muneca.webp",
+    hover: "assets/img/projects/bracelet-render.webp",
+    overview: {
+      es: ["Este proyecto se centra en el desarrollo técnico 3D de una pulsera de esmeraldas, combinando repetición geométrica, distribución de piedras y consideraciones estructurales. El proceso de modelado requirió especial atención a las proporciones, la alineación y la relación entre los diferentes componentes.",
+           "Se prestó especial atención a la construcción de la pulsera y los detalles del cierre, buscando equilibrar la consistencia visual con los requerimientos funcionales de una pieza de uso cotidiano."],
+      en: ["This project focuses on the technical 3D development of an emerald bracelet, combining geometric repetition, stone arrangement, and structural considerations. The modeling process required careful attention to proportions, alignment, and the relationship between individual components.",
+           "Special emphasis was placed on the bracelet's construction and clasp details, balancing visual consistency with the functional requirements of a wearable piece."],
+    },
+    sections: [
+      { type: "photo", src: "assets/img/projects/bracelet-render.webp", caption: { es: "Vista general del modelo: engastes y eslabones", en: "Overall view of the model: settings and links" }, wide: true },
+      { type: "grid", items: [
+        { src: "assets/img/projects/bracelet-broche.webp", caption: { es: "Render del cierre", en: "Clasp render" } },
+        { src: "assets/img/projects/bracelet-cierre-foto.webp", photo: true, caption: { es: "Pulsera terminada con su cierre", en: "Finished bracelet with its clasp" } },
+      ] },
+    ],
+  },
+  {
     // Proyecto real (textos de la guía de implementación)
     slug: "onyx-ring",
     real: true,
