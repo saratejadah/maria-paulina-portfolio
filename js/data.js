@@ -203,8 +203,10 @@ window.PROJECTS = [
            "The development required translating a sculptural jewelry concept into three-dimensional geometry while maintaining its distinctive visual character. The project highlights the use of digital modeling tools to develop complex surfaces, curved volumes, and continuous forms."],
     },
     sections: [
-      { type: "photo", src: "assets/img/projects/bangle-producto.webp", caption: { es: "Brazaletes Interbeing en oro y plata", en: "Interbeing bangles in gold and silver" } },
-      { type: "photo", src: "assets/img/projects/bangle-rhino.webp", caption: { es: "Vistas de modelado en Rhinoceros", en: "Modeling views in Rhinoceros" }, wide: true },
+      { type: "grid", row: [1448 / 1086, 1600 / 900], items: [
+        { src: "assets/img/projects/bangle-producto.webp", photo: true, caption: { es: "Brazaletes Interbeing en oro y plata", en: "Interbeing bangles in gold and silver" } },
+        { src: "assets/img/projects/bangle-rhino.webp", photo: true, caption: { es: "Vistas de modelado en Rhinoceros", en: "Modeling views in Rhinoceros" } },
+      ] },
       { type: "model", src: "assets/models/interbeing-bangle.glb" },
       { type: "photo", src: "assets/img/projects/bangle-modelo.webp", title: { es: "La pieza en uso", en: "The piece in context" }, caption: { es: "Brazaletes Interbeing en uso", en: "Interbeing bangles worn" }, wide: true },
     ],

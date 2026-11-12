@@ -300,7 +300,7 @@
         ${x.eyebrow ? `<span class="eyebrow">${x.eyebrow}</span>` : ""}<h2>${L(x.title)}</h2><p>${L(x.text)}</p>
       </section>`;
       if (x.type === "grid") return `
-      <section class="wrap p-block"><div class="p-grid${x.fill ? " is-fill" : ""}">${x.items.map((it, k) => `<figure class="reveal d${k + 1}${it.photo ? " is-photo" : ""}${it.video ? " is-video" : ""}">${media(it)}${cap(it.caption)}</figure>`).join("")}</div></section>`;
+      <section class="wrap p-block"><div class="p-grid${x.fill ? " is-fill" : ""}${x.row ? " is-row" : ""}"${x.row ? ` style="grid-template-columns:${x.row.map((r) => r.toFixed(3) + "fr").join(" ")}"` : ""}>${x.items.map((it, k) => `<figure class="reveal d${k + 1}${it.photo ? " is-photo" : ""}${it.video ? " is-video" : ""}">${media(it)}${cap(it.caption)}</figure>`).join("")}</div></section>`;
       const head = x.title ? `<div class="p-block-head reveal"><div><span class="eyebrow">${t("project.result")}</span><h2>${L(x.title)}</h2></div><p></p></div>` : "";
       return `
       <section class="wrap p-block">${head}
