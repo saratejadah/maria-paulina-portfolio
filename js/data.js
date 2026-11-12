@@ -24,7 +24,7 @@ window.PROJECTS = [
   {
     slug: "interbeing-flock-serpi",
     real: true,
-    coverPhoto: true,
+    hoverPhoto: true,
     title: { es: "Colección Interbeing — Flock & Serpi", en: "Interbeing Collection — Flock & Serpi" },
     tagline: { es: "Formas orgánicas, precisión digital.", en: "Organic forms, digital precision." },
     category: { es: "Colección · Modelado orgánico", en: "Collection · Organic modeling" },
@@ -38,8 +38,8 @@ window.PROJECTS = [
       { label: { es: "Diseño", en: "Design" }, value: "Claudia Vallejo" },
       { label: { es: "Mi participación", en: "Role" }, value: { es: "Modelado 3D de joyería y desarrollo técnico", en: "3D Jewelry Modeling & Technical Development" } },
     ],
-    cover: "assets/img/projects/flock-foto-1.webp",
-    hover: "assets/img/projects/serpi-cadenas.webp",
+    cover: "assets/img/projects/serpi-render.webp",
+    hover: "assets/img/projects/flock-foto-1.webp",
     overview: {
       es: ["Desarrollado en colaboración con la diseñadora de joyería Claudia Vallejo, este proyecto explora la transformación de formas escultóricas en modelos digitales de joyería. El proceso de modelado se centró en conservar el carácter orgánico, la fluidez y las proporciones de las referencias originales, desarrollando geometrías detalladas adecuadas para la fabricación."],
       en: ["Developed in collaboration with jewelry designer Claudia Vallejo, this project explores the translation of sculptural forms into digital jewelry models. The modeling process focused on preserving the organic character, fluidity, and proportions of the original references while developing detailed geometries suitable for jewelry production."],
@@ -53,7 +53,10 @@ window.PROJECTS = [
         { video: "assets/video/flock-360", caption: { es: "Modelo 3D de Flock en 360°", en: "Flock 3D model in 360°" } },
       ] },
       { type: "model", src: "assets/models/flock.glb", name: "Flock" },
-      { type: "photo", src: "assets/img/projects/flock-foto-2.webp", caption: { es: "Collar Flock terminado", en: "Finished Flock necklace" } },
+      { type: "grid", items: [
+        { src: "assets/img/projects/flock-foto-1.webp", photo: true, caption: { es: "Detalle del collar Flock", en: "Flock necklace detail" } },
+        { src: "assets/img/projects/flock-foto-2.webp", photo: true, caption: { es: "Collar Flock terminado", en: "Finished Flock necklace" } },
+      ] },
       { type: "text", eyebrow: "Serpi", title: { es: "Cadenas orgánicas", en: "Organic Chains" },
         text: { es: "Serpi explora el desarrollo de eslabones orgánicos curvados, ensamblados para crear una composición continua de joyería. El modelado requirió definir componentes individuales, manteniendo consistencia y continuidad visual a lo largo de la cadena.",
                 en: "Serpi explores the development of curved, organic links assembled into a continuous jewelry composition. The modeling process required defining individual components while maintaining consistency and visual continuity throughout the chain." } },
@@ -72,7 +75,7 @@ window.PROJECTS = [
   {
     slug: "emerald-bracelet",
     real: true,
-    coverPhoto: true,
+    hoverPhoto: true,
     title: { es: "Pulsera de Esmeraldas", en: "Emerald Bracelet" },
     tagline: { es: "Precisión en cada detalle", en: "Precision in Every Detail" },
     category: { es: "Pulsera · Engaste y cierre", en: "Bracelet · Setting & clasp" },
@@ -85,8 +88,8 @@ window.PROJECTS = [
     credits: [
       { label: { es: "Mi participación", en: "Role" }, value: { es: "Modelado 3D de joyería y desarrollo técnico", en: "3D Jewelry Modeling & Technical Development" } },
     ],
-    cover: "assets/img/projects/bracelet-muneca.webp",
-    hover: "assets/img/projects/bracelet-render.webp",
+    cover: "assets/img/projects/bracelet-broche.webp",
+    hover: "assets/img/projects/bracelet-muneca.webp",
     overview: {
       es: ["Este proyecto se centra en el desarrollo técnico 3D de una pulsera de esmeraldas, combinando repetición geométrica, distribución de piedras y consideraciones estructurales. El proceso de modelado requirió especial atención a las proporciones, la alineación y la relación entre los diferentes componentes.",
            "Se prestó especial atención a la construcción de la pulsera y los detalles del cierre, buscando equilibrar la consistencia visual con los requerimientos funcionales de una pieza de uso cotidiano."],
@@ -99,6 +102,7 @@ window.PROJECTS = [
         { src: "assets/img/projects/bracelet-broche.webp", caption: { es: "Render del cierre", en: "Clasp render" } },
         { src: "assets/img/projects/bracelet-cierre-foto.webp", photo: true, caption: { es: "Pulsera terminada con su cierre", en: "Finished bracelet with its clasp" } },
       ] },
+      { type: "photo", src: "assets/img/projects/bracelet-muneca.webp", title: { es: "La pieza terminada", en: "The finished piece" }, caption: { es: "Pulsera de Esmeraldas en uso", en: "Emerald Bracelet worn" } },
     ],
   },
   {
@@ -169,7 +173,7 @@ window.PROJECTS = [
   {
     slug: "interbeing-bangle",
     real: true,
-    coverPhoto: true,
+    hoverPhoto: true,
     title: { es: "Interbeing Bangle with Knob", en: "Interbeing Bangle with Knob" },
     pageTitle: { es: "Interbeing — Bangle with Knob", en: "Interbeing — Bangle with Knob" },
     tagline: { es: "Geometría escultórica en 3D", en: "Sculptural Geometry in 3D" },
@@ -184,8 +188,8 @@ window.PROJECTS = [
       { label: { es: "Diseño de joyería", en: "Jewelry Design" }, value: "Claudia Vallejo" },
       { label: { es: "Mi participación", en: "Role" }, value: { es: "Modelado 3D de joyería", en: "3D Jewelry Modeling" } },
     ],
-    cover: "assets/img/projects/bangle-producto.webp",
-    hover: "assets/img/projects/bangle-modelo.webp",
+    cover: "assets/img/projects/bangle-render.webp",
+    hover: "assets/img/projects/bangle-producto.webp",
     overview: {
       es: ["Como parte de la colección Interbeing de Claudia Vallejo, esta pieza explora la relación entre formas orgánicas fluidas y modelado digital de precisión.",
            "Su desarrollo requirió transformar un concepto de joyería escultórica en geometría tridimensional, conservando su carácter visual distintivo. El proyecto destaca el uso de herramientas digitales para desarrollar superficies complejas, volúmenes curvos y formas continuas."],
@@ -193,6 +197,7 @@ window.PROJECTS = [
            "The development required translating a sculptural jewelry concept into three-dimensional geometry while maintaining its distinctive visual character. The project highlights the use of digital modeling tools to develop complex surfaces, curved volumes, and continuous forms."],
     },
     sections: [
+      { type: "photo", src: "assets/img/projects/bangle-producto.webp", caption: { es: "Brazaletes Interbeing en oro y plata", en: "Interbeing bangles in gold and silver" } },
       { type: "photo", src: "assets/img/projects/bangle-rhino.webp", caption: { es: "Vistas de modelado en Rhinoceros", en: "Modeling views in Rhinoceros" }, wide: true },
       { type: "model", src: "assets/models/interbeing-bangle.glb" },
       { type: "photo", src: "assets/img/projects/bangle-modelo.webp", title: { es: "La pieza en uso", en: "The piece in context" }, caption: { es: "Brazaletes Interbeing en uso", en: "Interbeing bangles worn" }, wide: true },

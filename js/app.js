@@ -200,7 +200,7 @@
         </div>
         <a class="feature-media${p.coverPhoto ? " is-photo" : ""}" href="project.html?p=${p.slug}" aria-label="${L(p.title)} — ${t("featured.open")}">
           <img class="main" src="${p.cover}" alt="${L(p.title)}" decoding="async">
-          ${p.hover ? `<img class="alt" src="${p.hover}" alt="" loading="lazy" decoding="async">` : ""}
+          ${p.hover ? `<img class="alt${p.hoverPhoto ? " is-photo" : ""}" src="${p.hover}" alt="" loading="lazy" decoding="async">` : ""}
           <span class="open">${t("featured.open")} ${I.arrow}</span>
         </a>
       </article>
