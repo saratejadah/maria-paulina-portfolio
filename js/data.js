@@ -105,7 +105,7 @@ window.PROJECTS = [
         { src: "assets/img/projects/bracelet-cierre-foto.webp", photo: true, caption: { es: "Pulsera terminada con su cierre", en: "Finished bracelet with its clasp" } },
       ] },
       { type: "model", src: "assets/models/emerald-bracelet.glb" },
-      { type: "photo", src: "assets/img/projects/bracelet-muneca.webp", title: { es: "La pieza terminada", en: "The finished piece" }, caption: { es: "Pulsera de Esmeraldas en uso", en: "Emerald Bracelet worn" } },
+      { type: "photo", narrow: true, src: "assets/img/projects/bracelet-muneca.webp", title: { es: "La pieza terminada", en: "The finished piece" }, caption: { es: "Pulsera de Esmeraldas en uso", en: "Emerald Bracelet worn" } },
     ],
   },
   {

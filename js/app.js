@@ -304,7 +304,7 @@
       const head = x.title ? `<div class="p-block-head reveal"><div><span class="eyebrow">${t("project.result")}</span><h2>${L(x.title)}</h2></div><p></p></div>` : "";
       return `
       <section class="wrap p-block">${head}
-        <figure class="p-wide reveal${x.type === "photo" ? " is-photo" : ""}${x.wide ? " is-wide" : ""}">${media(x)}${cap(x.caption)}</figure>
+        <figure class="p-wide reveal${x.type === "photo" ? " is-photo" : ""}${x.wide ? " is-wide" : ""}${x.narrow ? " is-narrow" : ""}">${media(x)}${cap(x.caption)}</figure>
       </section>`;
     };
     root.innerHTML = `
