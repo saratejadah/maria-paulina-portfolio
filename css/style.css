@@ -531,3 +531,6 @@ figcaption.cap { padding: 12px 16px; font-size: 13px; color: var(--muted); borde
 .p-text p { margin: 0; font-size: 19px; line-height: 1.6; color: var(--text-2); }
 .p-text + .p-block { border-top: 0; padding-top: 36px; }
 @media (max-width: 980px) { .p-cover.is-photo { max-width: 460px; aspect-ratio: 4 / 5; max-height: none; } }
+.finish-orig { position: relative; }
+.finish-orig::after { content: ""; position: absolute; inset: 9px; border-radius: 50%; background: rgba(255,255,255,.9); box-shadow: 0 0 0 1px rgba(0,0,0,.15); }
+.finishes { gap: 6px; }

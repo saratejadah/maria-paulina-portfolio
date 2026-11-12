@@ -269,7 +269,7 @@
   /* ======================================================================
      PÁGINA DE PROYECTO
      ====================================================================== */
-  const FINISHES = { silver: [0.9, 0.91, 0.92], gold: [0.94, 0.77, 0.42], rose: [0.92, 0.7, 0.63] };
+  const FINISHES = { silver: [0.93, 0.94, 0.95], gold: [1.0, 0.77, 0.36], rose: [0.95, 0.66, 0.55] };
   function renderProject() {
     const slug = params.get("p");
     const i = P.findIndex((p) => p.slug === slug);
@@ -286,6 +286,10 @@
         <div class="p-block-head reveal"><div><span class="eyebrow">${t("project.model")}${name ? " · " + name : ""}</span><h2>${t("project.modelH")}</h2></div><p>${t("project.modelP")}</p></div>
         <div class="viewer reveal">
           <model-viewer src="${src}" alt="${name || L(p.pageTitle || p.title)} — 3D" camera-controls auto-rotate auto-rotate-delay="1500" rotation-per-second="18deg" interaction-prompt="none" shadow-intensity="0.6" shadow-softness="1" exposure="1.05" environment-image="neutral" touch-action="pan-y" loading="lazy"></model-viewer>
+          <div class="finishes" role="group" aria-label="${t("finish.label")}">
+            <button class="finish finish-orig on" data-f="orig" aria-label="${t("finish.orig")}" title="${t("finish.orig")}"></button>
+            ${Object.keys(FINISHES).map((f) => `<button class="finish" data-f="${f}" aria-label="${t("finish." + f)}" title="${t("finish." + f)}" style="background:radial-gradient(circle at 30% 30%,#fff,rgb(${FINISHES[f].map((c) => Math.round(c * 255)).join(",")}) 55%,rgb(${FINISHES[f].map((c) => Math.round(c * 160)).join(",")}))"></button>`).join("")}
+          </div>
           <span class="hint">${t("project.hint")}</span>
         </div>
       </section>`;
@@ -326,6 +330,7 @@
         <a class="feature-media reveal d1${n.coverPhoto ? " is-photo" : ""}" href="project.html?p=${n.slug}"><img class="main" src="${n.cover}" alt="${L(n.title)}" loading="lazy"><span class="open">${t("featured.open")} ${I.arrow}</span></a>
       </section>`;
     initVideos();
+    initFinishes();
   }
   function initVideos() {
     const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -336,13 +341,26 @@
     });
   }
   function initFinishes() {
-    const mv = $("#mv"); if (!mv) return;
-    const apply = (f) => {
-      if (!mv.model) return;
-      mv.model.materials.forEach((m) => { if (m.name.startsWith("metal")) { m.pbrMetallicRoughness.setBaseColorFactor([...FINISHES[f], 1]); } });
-    };
-    $$(".finish").forEach((b) => b.addEventListener("click", () => { $$(".finish").forEach((x) => x.classList.toggle("on", x === b)); apply(b.dataset.f); }));
-    mv.addEventListener("load", () => { const on = $(".finish.on"); if (on) apply(on.dataset.f); });
+    $$(".viewer").forEach((box) => {
+      const mv = box.querySelector("model-viewer"), btns = [...box.querySelectorAll(".finish")];
+      if (!mv || !btns.length) return;
+      let orig = null; // colores originales del metal, guardados al cargar
+      const metals = () => mv.model.materials.filter((m) => m.name.startsWith("metal"));
+      const apply = (f) => {
+        if (!mv.model) return;
+        if (!orig) orig = metals().map((m) => [...m.pbrMetallicRoughness.baseColorFactor]);
+        metals().forEach((m, i) => m.pbrMetallicRoughness.setBaseColorFactor(f === "orig" ? orig[i] : [...FINISHES[f], 1]));
+      };
+      btns.forEach((b) => b.addEventListener("click", () => { btns.forEach((x) => x.classList.toggle("on", x === b)); apply(b.dataset.f); }));
+      mv.addEventListener("load", () => {
+        orig = null;
+        // la muestra "original" toma el color real del metal de la pieza
+        const c = metals()[0]?.pbrMetallicRoughness.baseColorFactor;
+        if (c) { const rgb = c.slice(0, 3).map((v) => Math.round(v * 255)), dark = c.slice(0, 3).map((v) => Math.round(v * 160));
+          box.querySelector(".finish-orig").style.background = `radial-gradient(circle at 30% 30%,#fff,rgb(${rgb}) 55%,rgb(${dark}))`; }
+        const on = box.querySelector(".finish.on"); if (on && on.dataset.f !== "orig") apply(on.dataset.f);
+      });
+    });
   }
 
   /* ---------- Arranque ---------- */
