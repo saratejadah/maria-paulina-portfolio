@@ -140,7 +140,7 @@ window.PROJECTS = [
         { src: "assets/img/projects/onyx-render-3.webp", caption: { es: "Detalle de la estructura de los engastes", en: "Detail of the setting structure" } },
       ] },
       { type: "model", src: "assets/models/onyx-ring.glb" },
-      { type: "photo", src: "assets/img/projects/onyx-foto.webp", title: { es: "La pieza fabricada", en: "The finished piece" }, caption: { es: "Anillo de Ónix fabricado", en: "Finished Onyx Ring" } },
+      { type: "photo", narrow: true, src: "assets/img/projects/onyx-foto.webp", title: { es: "La pieza fabricada", en: "The finished piece" }, caption: { es: "Anillo de Ónix fabricado", en: "Finished Onyx Ring" } },
     ],
   },
   {
