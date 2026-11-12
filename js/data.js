@@ -38,7 +38,7 @@ window.PROJECTS = [
       { label: { es: "Diseño", en: "Design" }, value: "Claudia Vallejo" },
       { label: { es: "Mi participación", en: "Role" }, value: { es: "Modelado 3D de joyería y desarrollo técnico", en: "3D Jewelry Modeling & Technical Development" } },
     ],
-    cover: "assets/img/projects/serpi-render.webp",
+    cover: "assets/img/projects/flock-serpi-render.webp?v=20261112212923",
     hover: "assets/img/projects/flock-foto-1.webp",
     overview: {
       es: ["Desarrollado en colaboración con la diseñadora de joyería Claudia Vallejo, este proyecto explora la transformación de formas escultóricas en modelos digitales de joyería. El proceso de modelado se centró en conservar el carácter orgánico, la fluidez y las proporciones de las referencias originales, desarrollando geometrías detalladas adecuadas para la fabricación."],
