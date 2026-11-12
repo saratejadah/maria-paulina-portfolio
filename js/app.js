@@ -320,9 +320,7 @@
       </section>
       <section class="wrap p-overview">
         <div class="reveal">${L(p.overview).map((x) => `<p>${x}</p>`).join("")}</div>
-        ${`<dl class="p-meta reveal">
-          ${(p.credits || []).map((c) => `<div><dt>${L(c.label)}</dt><dd>${L(c.value)}</dd></div>`).join("")}
-        </dl>`}
+
       </section>
       ${p.sections.map(sectionHTML).join("")}
       <section class="wrap p-next">
