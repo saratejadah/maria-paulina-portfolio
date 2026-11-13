@@ -111,6 +111,7 @@ window.PROJECTS = [
   {
     // Proyecto real (textos de la guía de implementación)
     slug: "onyx-ring",
+    hoverPhoto: true,
     real: true,
     title: { es: "Onyx Ring — Carré Setting", en: "Onyx Ring — Carré Setting" },
     pageTitle: { es: "Anillo de Ónix", en: "Onyx Ring" },
@@ -126,7 +127,7 @@ window.PROJECTS = [
       { label: { es: "Mi participación", en: "Role" }, value: { es: "Modelado 3D de joyería y desarrollo técnico", en: "3D Jewelry Modeling & Technical Development" } },
     ],
     cover: "assets/img/projects/onyx-render-1.webp",
-    hover: "assets/img/projects/onyx-render-2.webp",
+    hover: "assets/img/projects/onyx-foto.webp",
     overview: {
       es: ["Este proyecto destaca el desarrollo técnico de un anillo con piedras, haciendo énfasis en el control geométrico, la ubicación de las gemas y la construcción detallada de los engastes.",
            "El proceso de modelado 3D incluyó el ajuste de proporciones y la integración de los engastes en la estructura general, buscando un diseño coherente. El proyecto demuestra la importancia de la precisión en el desarrollo digital de joyería, donde incluso los pequeños detalles geométricos influyen en el resultado final."],
