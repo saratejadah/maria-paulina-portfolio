@@ -229,6 +229,7 @@
     $("#cv-view").href = `cv.html?lang=${lang}`;
 
     // Contacto
+    [["#c-wa", "contact.wa"], ["#c-mail", "contact.mail"], ["#c-ig", "contact.ig"]].forEach(([id, k]) => { const a = $(id); a.setAttribute("aria-label", t(k)); a.title = t(k); });
     $("#c-wa").href = waLink(); $("#c-wa-num").textContent = fmtPhone(S.whatsapp);
     $("#c-mail").href = `mailto:${S.email}`; $("#c-mail-txt").textContent = S.email;
     $("#c-ig").href = `https://instagram.com/${S.instagram}`; $("#c-ig-txt").textContent = "@" + S.instagram;
