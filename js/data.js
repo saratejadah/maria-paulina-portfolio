@@ -247,6 +247,9 @@ window.GALLERY = (() => {
     { img: "assets/img/gallery/foto-anillo-dientes.webp?v=20261113135402", photo: true, cat: "anillos", title: { es: "Anillo Dientes", en: "Teeth Ring" } },
     { img: "assets/img/gallery/foto-anillo-leon-resina.webp?v=20261113135402", photo: true, cat: "anillos", title: { es: "Anillo León (impresión en resina)", en: "Lion Ring (resin print)" } },
     { img: "assets/img/gallery/foto-anillo-personaje.webp?v=20261113135402", photo: true, cat: "anillos", title: { es: "Anillo Personaje", en: "Character Ring" } },
+    { img: "assets/img/gallery/foto-dije-mama-bebe.webp?v=20261113135547", photo: true, cat: "religiosa", title: { es: "Dije Mamá y Bebé", en: "Mother & Baby Pendant" } },
+    { img: "assets/img/gallery/foto-aretes-sol.webp?v=20261113135547", photo: true, cat: "aretes", title: { es: "Aretes Soles Citrinos", en: "Citrine Sun Earrings" } },
+    { img: "assets/img/gallery/foto-dije-caballo-resina.webp?v=20261113135547", photo: true, cat: "religiosa", title: { es: "Dije Caballo (impresión en resina)", en: "Horse Pendant (resin print)" } },
   ];
 
   return real;
