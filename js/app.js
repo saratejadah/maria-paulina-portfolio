@@ -215,7 +215,7 @@
 
     // Galería
     $("#masonry").innerHTML = G.map((g, i) => `
-      <button class="tile reveal" data-i="${i}" data-cat="${g.cat}">
+      <button class="tile reveal${g.photo ? " is-photo" : ""}" data-i="${i}" data-cat="${g.cat}">
         <img src="${g.img}" alt="${L(g.title)}" loading="lazy" decoding="async">
         <figcaption>${L(g.title)} <span>${L(C[g.cat])}</span></figcaption>
       </button>`).join("");
