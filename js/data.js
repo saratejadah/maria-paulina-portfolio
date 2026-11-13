@@ -247,7 +247,7 @@ window.GALLERY = (() => {
     { img: "assets/img/gallery/foto-leaf-necklace.webp?v=20261113161801", photo: true, cat: "organico", title: { es: "Leaf Necklace", en: "Leaf Necklace" } },
     { img: "assets/img/gallery/foto-anillo-trisquel.webp?v=20261113135402", photo: true, cat: "anillos", title: { es: "Anillo Trisquel", en: "Triskelion Ring" } },
     { img: "assets/img/gallery/foto-anillo-greca.webp?v=20261113135402", photo: true, cat: "anillos", title: { es: "Anillo de Show", en: "Show Ring" } },
-    { img: "assets/img/gallery/foto-anillo-dientes.webp?v=20261113135402", photo: true, cat: "anillos", title: { es: "Anillo Dientes", en: "Teeth Ring" } },
+    { img: "assets/img/gallery/foto-anillo-dientes.webp?v=20261113135402", photo: true, cat: "anillos", title: { es: "Anillo Vampiro", en: "Vampire Ring" } },
     { img: "assets/img/gallery/foto-anillo-leon-resina.webp?v=20261113135402", photo: true, cat: "anillos", title: { es: "Anillo León Resina", en: "Lion Ring — Resin" } },
     { img: "assets/img/gallery/foto-anillo-personaje.webp?v=20261113135402", photo: true, cat: "anillos", title: { es: "Anillo Personaje", en: "Character Ring" } },
     { img: "assets/img/gallery/foto-dije-caballo-resina.webp?v=20261113135547", photo: true, cat: "religiosa", title: { es: "Dije Cebú Resina", en: "Zebu Pendant — Resin" } },
