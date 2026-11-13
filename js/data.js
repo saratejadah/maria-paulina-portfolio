@@ -39,7 +39,7 @@ window.PROJECTS = [
       { label: { es: "Mi participación", en: "Role" }, value: { es: "Modelado 3D de joyería y desarrollo técnico", en: "3D Jewelry Modeling & Technical Development" } },
     ],
     cover: "assets/img/projects/flock-serpi-render.webp?v=20261112212923",
-    hover: "assets/img/projects/flock-foto-1.webp",
+    hover: "assets/img/projects/serpi-cadenas.webp",
     overview: {
       es: ["Desarrollado en colaboración con la diseñadora de joyería Claudia Vallejo, este proyecto explora la transformación de formas escultóricas en modelos digitales de joyería. El proceso de modelado se centró en conservar el carácter orgánico, la fluidez y las proporciones de las referencias originales, desarrollando geometrías detalladas adecuadas para la fabricación."],
       en: ["Developed in collaboration with jewelry designer Claudia Vallejo, this project explores the translation of sculptural forms into digital jewelry models. The modeling process focused on preserving the organic character, fluidity, and proportions of the original references while developing detailed geometries suitable for jewelry production."],
