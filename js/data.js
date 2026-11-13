@@ -242,14 +242,14 @@ window.GALLERY = (() => {
     { img: "assets/img/gallery/dije-corazon-rubi.webp?v=20261110164743", cat: "religiosa", title: { es: "Dije Corazón", en: "Heart Pendant" } },
     { img: "assets/img/gallery/dije-reja.webp?v=20261110164743", cat: "religiosa", title: { es: "Dije Malla", en: "Mesh Pendant" } },
     { img: "assets/img/gallery/set-piedras-colores.webp?v=20261110164743", cat: "sets", title: { es: "Polished Gold Emerald Jewelry Set", en: "Polished Gold Emerald Jewelry Set" } },
-    { img: "assets/img/gallery/foto-dije-mama-bebe.webp?v=20261113135547", photo: true, cat: "religiosa", title: { es: "Dije Mamá y Bebé", en: "Mother & Baby Pendant" } },
-    { img: "assets/img/gallery/foto-aretes-sol.webp?v=20261113135547", photo: true, cat: "aretes", title: { es: "Aretes Soles Citrinos", en: "Citrine Sun Earrings" } },
+    { img: "assets/img/gallery/foto-dije-mama-bebe.webp?v=20261113135547", photo: true, cat: "religiosa", title: { es: "Dije Mami y Bebé", en: "Mom & Baby Pendant" } },
+    { img: "assets/img/gallery/foto-aretes-sol.webp?v=20261113135547", photo: true, cat: "aretes", title: { es: "Gold Sunburst Earrings with Amber Gemstones", en: "Gold Sunburst Earrings with Amber Gemstones" } },
     { img: "assets/img/gallery/foto-anillo-trisquel.webp?v=20261113135402", photo: true, cat: "anillos", title: { es: "Anillo Trisquel", en: "Triskelion Ring" } },
-    { img: "assets/img/gallery/foto-anillo-greca.webp?v=20261113135402", photo: true, cat: "anillos", title: { es: "Anillo Greca", en: "Greek Key Ring" } },
+    { img: "assets/img/gallery/foto-anillo-greca.webp?v=20261113135402", photo: true, cat: "anillos", title: { es: "Anillo de Show", en: "Show Ring" } },
     { img: "assets/img/gallery/foto-anillo-dientes.webp?v=20261113135402", photo: true, cat: "anillos", title: { es: "Anillo Dientes", en: "Teeth Ring" } },
-    { img: "assets/img/gallery/foto-anillo-leon-resina.webp?v=20261113135402", photo: true, cat: "anillos", title: { es: "Anillo León (impresión en resina)", en: "Lion Ring (resin print)" } },
+    { img: "assets/img/gallery/foto-anillo-leon-resina.webp?v=20261113135402", photo: true, cat: "anillos", title: { es: "Anillo León Resina", en: "Lion Ring — Resin" } },
     { img: "assets/img/gallery/foto-anillo-personaje.webp?v=20261113135402", photo: true, cat: "anillos", title: { es: "Anillo Personaje", en: "Character Ring" } },
-    { img: "assets/img/gallery/foto-dije-caballo-resina.webp?v=20261113135547", photo: true, cat: "religiosa", title: { es: "Dije Caballo (impresión en resina)", en: "Horse Pendant (resin print)" } },
+    { img: "assets/img/gallery/foto-dije-caballo-resina.webp?v=20261113135547", photo: true, cat: "religiosa", title: { es: "Dije Cebú Resina", en: "Zebu Pendant — Resin" } },
   ];
 
   return real;
