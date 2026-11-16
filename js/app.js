@@ -217,7 +217,7 @@
     $("#masonry").innerHTML = G.map((g, i) => `
       <button class="tile reveal${g.photo ? " is-photo" : ""}" data-i="${i}" data-cat="${g.cat}">
         <img src="${g.img}" alt="${L(g.title)}" loading="lazy" decoding="async">
-        <figcaption>${L(g.title)} <span>${L(C[g.cat])}</span></figcaption>
+        <figcaption>${L(g.title)} <span>${L(C[g.cat])}</span></figcaption>${g.credit ? `<small class="tile-credit"><span class="cr-long">${g.credit}</span><span class="cr-short">${g.credit.split(" · ")[0]}</span></small>` : ""}
       </button>`).join("");
     $$("#masonry .tile").forEach((b) => b.addEventListener("click", () => openLB(+b.dataset.i)));
     filterGallery();
@@ -252,7 +252,7 @@
   function drawLB() {
     const g = G[lbIndex];
     $("#lb-img").src = g.img; $("#lb-img").alt = L(g.title);
-    $("#lb-title").textContent = L(g.title); $("#lb-cat").textContent = L(C[g.cat]);
+    $("#lb-title").textContent = L(g.title); $("#lb-cat").textContent = L(C[g.cat]) + (g.credit ? " · " + g.credit : "");
   }
   function stepLB(d) { const v = visible(); const k = v.indexOf(lbIndex); lbIndex = v[(k + d + v.length) % v.length]; drawLB(); }
   function closeLB() { $("#lightbox").classList.remove("open"); $("#lightbox").setAttribute("aria-hidden", "true"); document.body.style.overflow = ""; lastFocus && lastFocus.focus(); }
